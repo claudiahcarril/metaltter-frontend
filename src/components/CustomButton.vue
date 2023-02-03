@@ -22,7 +22,7 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    background-color: white;
+    background-color: #bc2025;
     border: none;
     height: 40px;
     min-width: 120px;
@@ -30,12 +30,13 @@ export default defineComponent({
     margin-right: 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 500;
-    color: black;
+    color: white;
+    transition: all 0.3s ease-in-out;
 }
 
 
 .btn-outline-success:hover {
-    background-color: #bc2025;
+    transform: scale(1.1);
 }
 
 

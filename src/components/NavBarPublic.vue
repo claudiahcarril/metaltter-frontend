@@ -9,7 +9,7 @@
                     <span class="material-symbols-outlined">login</span>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'login'}">Regístrate</router-link>
+                    <router-link :to="{name: 'register'}">Regístrate</router-link>
                 </template>
             </CustomButton>
             <CustomButton>
@@ -30,7 +30,7 @@ import { defineComponent } from 'vue'
 import CustomButton from './CustomButton.vue';
 
 export default defineComponent({
-    name: 'NavBar',
+    name: 'NavBarPublic',
     components: {
         CustomButton,
     }
@@ -66,10 +66,8 @@ export default defineComponent({
 
 a {
     text-decoration: none;
-    color: black;
-}
-
-a:hover {
     color: white;
 }
+
+
 </style>
