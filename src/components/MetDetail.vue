@@ -2,11 +2,14 @@
     <div class="met">
         <div class="met-avatar">{{ met.postedBy.avatar }}</div>
         <div class="met-body">
-            <div class="met-name">{{ met.postedBy.name }}</div>
-            <div class="met-username">{{ met.postedBy.username }}</div>
+            <div class="met-name">{{ user?.name }}</div>
+            <div class="met-username">{{ user?.username }}</div>
             <div class="met-content">{{ met.message }}</div>
             <div class="met-image">{{ met.image }}</div>
-            <div class="met-kudos">{{ met.kudos }}</div>
+            <div class="kudos">
+                <img src="../assets/hand.png" alt="" width="25" height="25">
+                <div class="met-kudos">{{ met.kudos }}</div>
+            </div>
         </div>
         <div class="met-datecreated">{{ met.dateCreated }}</div>
     </div>
@@ -16,6 +19,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { Met } from '@/models/mets'
+import { User } from '@/models/users';
 
 export default defineComponent({
     name: 'MetDetail',
@@ -24,10 +28,16 @@ export default defineComponent({
         met: {
             type: Object as PropType<Met>,
                 required: true  
+        },
+        user: {
+            type: Object as PropType<User>,
+                required: true
+                
         }
     },
 
-    setup() {
+    setup(props) {
+        console.log(props.user?.avatar)
         return{}
     }
 
@@ -53,6 +63,11 @@ export default defineComponent({
 
 
 
+
+.kudos {
+    display: flex;
+    flex-direction: row;
+}
 
 
 
