@@ -9,8 +9,8 @@ const actions: ActionTree<IMetState, IState> = {
     async fetchMets({ commit }) {
         commit('setIsLoading', true)
         const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>('/mets')
-        commit('setIsLoading', false)
         commit('setMets', data)
+        commit('setIsLoading', false)
     }
 }
 

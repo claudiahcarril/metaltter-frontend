@@ -39,7 +39,7 @@ export default defineComponent({
 .d-flex {
     margin: 20px 50px 20px 50px;
     width: 90%;
-    position: fixed; z-index: 8;
+    /* position: fixed; z-index: 8; */
 }
 
 .bi-search {

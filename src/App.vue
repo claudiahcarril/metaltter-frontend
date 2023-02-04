@@ -20,6 +20,7 @@ body, html {
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: contain;
+  background-attachment: fixed;
 }
 
 

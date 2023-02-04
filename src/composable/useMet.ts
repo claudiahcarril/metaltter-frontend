@@ -10,7 +10,7 @@ const useMets = () => {
         met: computed(() => store.getters['mets/getMet']),
 
         // ACTIONS
-        fetchMets: store.dispatch('mets/fetchMets')
+        fetchMets: () => store.dispatch('mets/fetchMets')
     }
 }
 
