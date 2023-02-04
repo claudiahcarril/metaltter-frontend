@@ -40,4 +40,8 @@ export default defineComponent({
 }
 
 
+.btn-outline-success:active {
+    background-color: white;
+}
+
 </style>

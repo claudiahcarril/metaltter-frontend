@@ -124,4 +124,20 @@ export default defineComponent({
   transform: scale(1.1);
 }
 
+.btn-submit:active {
+  color: black;
+  background-color: white;
+}
+
+
+.form-control {
+    font-size: smaller;
+}
+
+.form-control:focus {
+  border-color: #bc2025;
+  box-shadow: 0 1px 1px #bc2025 inset, 0 0 8px #bc2025;
+  outline: 0 none;
+}
+
 </style>

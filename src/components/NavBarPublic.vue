@@ -56,6 +56,7 @@ export default defineComponent({
     
 }
 
+
 .material-symbols-outlined {
     margin-right: 8px;
 }
@@ -64,9 +65,17 @@ export default defineComponent({
     color: white;
 }
 
+.material-symbols-outlined:active {
+    color: black;
+}
+
 a {
     text-decoration: none;
     color: white;
+}
+
+a:active {
+    color: black;
 }
 
 
