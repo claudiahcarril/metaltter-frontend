@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'register',
     component: () => import(/* webpackChunkName: "register" */ '../views/RegisterView.vue')
   },
+  {
+    path: '/recovering-password',
+    name: 'recovering-password',
+    component: () => import(/* webpackChunkName: "recovering-password" */ '../views/PasswordRecoveringView.vue')
+  },
 ]
 
 const router = createRouter({

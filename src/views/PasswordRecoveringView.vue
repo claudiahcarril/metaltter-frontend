@@ -2,25 +2,21 @@
     <NavBarPublic />
     <form @submit.prevent="sendForm" class="form">
     <div class="form-title-section">
-      <h1 class="form-title">Inicia sesión en</h1>
-      <img src="../assets/metaltterLogo.png" alt="">
+      <h1 class="form-title">¿Olvidaste la contraseña?</h1>
+    </div>
+    <div>
+    <h2 class="form-subtitle">Introduce tu correo electrónico y te enviaremos instrucciones para crear una nueva contraseña.</h2>
     </div>
     <div class="row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
+      <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <input v-model="username" type="text" class="form-control" id="staticUsername" placeholder="Añade un nombre de usuario" required>
+        <input v-model="password" type="email" class="form-control" id="inputEmail" placeholder="Indica tu dirección de correo" required>
       </div>
     </div>
-    <div class="row">
-      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input v-model="password" type="password" class="form-control" id="inputPassword" placeholder="Añade tu contraseña" required>
-      </div>
+    <div class="login">
+        <p>No importa, <router-link :to="{name: 'login'}">llévame de nuevo a la página de Login.</router-link></p>
     </div>
-    <div class="password-forgotten">
-        <p>¿Has olvidado tu contraseña? Clica <router-link :to="{name: 'recovering-password'}">aquí.</router-link></p>
-    </div>
-    <button class="btn btn-submit" type="submit">Iniciar sesión</button>
+    <button class="btn btn-submit" type="submit">Enviar mail</button>
   </form>
 </template>
 
@@ -81,6 +77,16 @@ export default defineComponent({
   padding-top: 15px;
 }
 
+
+.form-subtitle {
+  font-weight: 400;
+  padding: 5px;
+  color: white;
+  font-size: 1rem;
+  margin: 0 80px 0 80px ;
+  padding-top: 10px;
+}
+
 .col-form-label {
   font-weight: 700;
   color: white;
@@ -91,7 +97,7 @@ export default defineComponent({
   margin: 30px 20px 20px 20px;
 }
 
-.password-forgotten {
+.login {
     color: white;
 }
 
