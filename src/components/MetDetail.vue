@@ -19,5 +19,29 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'MetDetail',
+
+    props: {
+        postedBy: {type: Object, required: true},
+        image: {type: String},
+        message: {type: String, required: true},
+        kudos: {type: Number, required: true},
+        dateCreated: {type: Date, required: true},
+    },
+
+    setup() {
+
+
+        return {}
+    }
+
+
+
 })
 </script>
+
+
+
+
+<style scoped>
+
+</style>
