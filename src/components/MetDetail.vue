@@ -1,11 +1,16 @@
 <template>
     <div class="met">
-        <div class="met-avatar">{{ met.postedBy.avatar }}</div>
+        <div class="met-avatar">
+            <img :src="imagesUrl + met.postedBy.avatar" alt="sndfsnb" width="80" height="80">
+        </div>
         <div class="met-body">
             <div class="met-name">{{ met.postedBy.name}}</div>
-            <div class="met-username">{{ met.postedBy.username }}</div>
+            <div class="met-username">@{{ met.postedBy.username }}</div>
             <div class="met-content">{{ met.message }}</div>
-            <div class="met-image">{{ met.image }}</div>
+            <div v-if="met.image !== ''" class="met-image">
+                <img :src="imagesUrl + met.image" alt="sndfsnb">
+            </div>
+            <div v-else></div>
             <div class="kudos">
                 <img src="../assets/hand.png" alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
@@ -19,6 +24,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { Met } from '@/models/mets'
+import config from '@/config'
 
 export default defineComponent({
     name: 'MetDetail',
@@ -31,8 +37,7 @@ export default defineComponent({
     },
 
     setup() {
-
-        return{}
+        return{ imagesUrl: config.imagesUrl }
     }
 
 })
@@ -45,24 +50,69 @@ export default defineComponent({
 
 .met {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 800px;
-    height: 250px;
+    min-height: 150px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    margin: 50px 100px 100px 100px;
-    background-color: #d9d9d9;
+    margin: 20px 100px 40px 100px;
+    background-color: #EFEFEF;
+    border-radius: 20px;
 }
 
+.met:hover {
+    background-color: #E4E4E4;
+}
 
+.met-avatar > img {
+    border-radius: 50%;
+    margin: 15px 0 0 15px;
+}
 
+.met-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 15px 15px 20px 25px;
+    width: 60%;
+}
 
+.met-name {
+    font-size: x-large;
+    color: black;
+    font-weight: 700;
+}
+
+.met-username {
+    font-size: 1.1rem;
+    color: black;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.met-content {
+    font-size: 0.9rem;
+    color: black;
+    text-align: start;
+    margin-bottom: 15px;
+}
 
 
 .kudos {
     display: flex;
     flex-direction: row;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
+    margin-top: 10px;
 }
 
+.met-datecreated {
+    font-size: 0.8rem;
+    color: black;
+    margin: 15px 15px 0 0
+}
 
 
 </style>

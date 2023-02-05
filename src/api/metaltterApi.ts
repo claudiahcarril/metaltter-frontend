@@ -1,7 +1,8 @@
 import axios, { AxiosHeaders } from 'axios'
+import config from '@/config'
 
 const metaltterApi = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: config.apiUrl,
     headers: {
         "Access-Control-Allow-Origin": "*"
       }
