@@ -12,8 +12,9 @@ const actions: ActionTree<IUserState, IState> = {
         console.log(data)
     },
 
-    async fetchUserById({commit}, userId: number) {
+    async fetchUserById({commit}, userId: string) {
         const {data} = await metaltterApi.get<unknown, AxiosResponse<User>>(`/users/${userId}`)
+        console.log('actions', data)
         commit('setSelectedUser', data)
     }
 }

@@ -6,11 +6,11 @@ const useUsers = () => {
     return {
         // GETTERS
         users: computed(() => store.getters['users/getUsers']),
-        user: computed(() => store.getters['/users/getUser']),
+        user: computed(() => store.getters['users/getUser']),
 
         // ACTIONS
         fetchUsers: () => store.dispatch('users/fetchUsers'),
-        fetchUserById: (userId: number) => store.dispatch('users/fetchUserById', userId)
+        fetchUserById: (userId: string) => store.dispatch('users/fetchUserById', userId)
     }
 }
 

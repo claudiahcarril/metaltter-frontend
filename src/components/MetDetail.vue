@@ -4,7 +4,7 @@
             <img :src="imagesUrl + met.postedBy.avatar" alt="sndfsnb" width="80" height="80">
         </div>
         <div class="met-body">
-            <div class="met-name">{{ met.postedBy.name}}</div>
+            <div class="met-name" @click="$emit('goProfile', met)">{{ met.postedBy.name}}</div>
             <div class="met-username">@{{ met.postedBy.username }}</div>
             <div class="met-content">{{ met.message }}</div>
             <div v-if="met.image !== ''" class="met-image">

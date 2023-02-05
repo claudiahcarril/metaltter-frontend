@@ -16,7 +16,9 @@
         </div>
         <div v-if="isLoading">Cargando mets...</div>
         <div class="mets-list" v-else>
-            <MetDetail v-for="met in mets" :key="met" :met="met" />
+            <MetDetail v-for="met in mets" :key="met" :met="met" 
+            @goProfile="goProfile"
+            />
         </div>
     </div>
     <div></div>
@@ -30,6 +32,8 @@ import SearchBar from '@/components/SearchBar.vue'
 import MetDetail from '@/components/MetDetail.vue';
 import useMets from '@/composable/useMet';
 import CustomButton from '@/components/CustomButton.vue';
+import { useRouter } from 'vue-router';
+import { Met } from '@/models/mets';
 
 export default defineComponent({
     name: 'ListMets',
@@ -42,11 +46,13 @@ export default defineComponent({
 
     setup() {
         const { mets, isLoading, fetchMets } = useMets()
+        const router = useRouter()
         fetchMets()
 
         return {
             mets,
             isLoading,
+            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
             
         }
     }

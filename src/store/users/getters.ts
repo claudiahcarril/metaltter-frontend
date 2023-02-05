@@ -8,6 +8,7 @@ const getters: GetterTree<IUserState, IState> = {
     },
 
     getUser(state) {
+        console.log(3333)
         return state.selectedUser
     }
 }

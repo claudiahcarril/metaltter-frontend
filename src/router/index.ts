@@ -22,6 +22,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'recovering-password',
     component: () => import(/* webpackChunkName: "recovering-password" */ '../views/PasswordRecoveringView.vue')
   },
+  {
+    path: '/users/:id',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
+    props: (route) => {
+      return { id: route.params.id }
+    }
+  }
 ]
 
 const router = createRouter({
