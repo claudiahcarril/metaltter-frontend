@@ -1,6 +1,6 @@
 <template>
     <div class="met">
-        <div class="met-avatar">
+        <div class="met-avatar" @click="$emit('goProfile', met)">
             <img :src="imagesUrl + met.postedBy.avatar" alt="sndfsnb" width="80" height="80">
         </div>
         <div class="met-body">
