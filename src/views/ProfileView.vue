@@ -11,12 +11,12 @@
             <div class="user-username">@{{ user.username }}</div>
             <div class="follow">
                 <div class="followers">
-                    <img src="../assets/hand.png" alt="" width="25" height="25">
-                    <div class="met-kudos">{{ user.followers }}</div>
+                    <div class="met-kudos">Seguidores: {{ user.followers }}</div>
+                    <img class="followers-icon" src="../assets/followers-icon.png" alt="" width="25" height="25">
                 </div>
                 <div class="following">
-                    <img src="../assets/hand.png" alt="" width="25" height="25">
-                    <div class="met-kudos">{{ user.following }}</div>
+                    <div class="met-kudos"> Siguiendo: {{ user.following }}</div>
+                    <img src="../assets/following-icon.png" alt="" width="25" height="25">
                 </div>
             </div>
         </div>
@@ -35,7 +35,6 @@
         </div>
         <div v-if="isLoading">Cargando mets...</div>
         <div class="mets-list" v-else>
-            {{ userMets }}
             <MetDetail v-for="met in userMets" :key="met" :met="met"></MetDetail>
         </div>
     </div>
@@ -48,6 +47,7 @@ import NavBarPublic from '@/components/NavBarPublic.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import useUsers from '@/composable/useUsers';
 import MetDetail from '@/components/MetDetail.vue';
+import CustomButton from '@/components/CustomButton.vue';
 import config from '@/config';
 import useMets from '@/composable/useMet';
 
@@ -57,6 +57,7 @@ export default defineComponent({
         NavBarPublic,
         SearchBar,
         MetDetail,
+        CustomButton
     },
 
     props: {
@@ -143,14 +144,19 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     color: white;
+    margin-right: 20px;
 }
 
 .following {
     display: flex;
     flex-direction: row;
     color: white;
+    align-items: end;
 }
 
+.followers > img, .following > img {
+    margin-left: 5px;
+}
 
 .h1 {
     font-size: xx-large;
@@ -160,4 +166,36 @@ export default defineComponent({
     margin: 30px 0 0 100px;
     padding: 0;
 }
+
+.mets-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-info {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding-right: 130px;
+}
+
+.btn-outline-success:active {
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    margin-left: 15px;
+}
+
+a:active {
+    color: white;
+}
+
+
+
 </style>

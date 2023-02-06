@@ -14,12 +14,12 @@
                 </template>
             </CustomButton>
         </div>
-        <div v-if="isLoading">Cargando mets...</div>
-        <div class="mets-list" v-else>
-            <MetDetail v-for="met in mets" :key="met" :met="met" 
-            @goProfile="goProfile"
-            />
-        </div>
+    </div>
+    <div v-if="isLoading">Cargando mets...</div>
+    <div class="mets-list" v-else>
+        <MetDetail v-for="met in mets" :key="met" :met="met" 
+        @goProfile="goProfile"
+        />
     </div>
     <div></div>
 </template>
@@ -72,6 +72,9 @@ export default defineComponent({
 
 .mets-list {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .home-info {
