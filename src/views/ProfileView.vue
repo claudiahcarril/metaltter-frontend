@@ -35,8 +35,8 @@
         </div>
         <div v-if="isLoading">Cargando mets...</div>
         <div class="mets-list" v-else>
-            <MetDetail v-for="met in mets" :key="met" :met="met" 
-            />
+            {{ userMets }}
+            <MetDetail v-for="met in userMets" :key="met" :met="met"></MetDetail>
         </div>
     </div>
 </template>
@@ -68,21 +68,20 @@ export default defineComponent({
     
     setup(props) {
         const { user, fetchUserById } = useUsers()
-        const { mets, isLoading, fetchMets } = useMets()
-
-        console.log(mets)
+        const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser } = useMets()
         
         fetchUserById(props.id)
+        fetchMetsPostedByUser(props.id)
 
 
         return {
             imagesUrl: config.imagesUrl,
             user,
             mets,
+            userMets,
             isLoading,
-            fetchMets
-            
-
+            fetchMets,
+            fetchMetsPostedByUser          
         }
     }
 

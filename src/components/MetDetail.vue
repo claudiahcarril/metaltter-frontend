@@ -33,7 +33,7 @@ export default defineComponent({
         met: {
             type: Object as PropType<Met>,
                 required: true  
-        }
+        },
     },
 
     setup() {

@@ -8,9 +8,11 @@ const useMets = () => {
         mets: computed(() => store.getters['mets/getMets']),
         isLoading: computed(() => store.getters['mets/getIsLoading']),
         met: computed(() => store.getters['mets/getMet']),
+        userMets: computed(() => store.getters['mets/getMetPostedByUser']),
 
         // ACTIONS
-        fetchMets: () => store.dispatch('mets/fetchMets')
+        fetchMets: () => store.dispatch('mets/fetchMets'),
+        fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId)
     }
 }
 
