@@ -21,15 +21,15 @@
                         </div>
                     </div>
                 </div>
-                <CustomButton>
-                    <template v-slot:left-icon>
-                        <i class="bi bi-person-circle"></i>
-                    </template>
-                    <template v-slot:right-text>
-                        <router-link :to="{name: 'mi-perfil'}">Darme de baja</router-link>
-                    </template>
-                </CustomButton>
             </div>
+            <CustomButton>
+                <template v-slot:left-icon>
+                    <i class="bi bi-person-circle"></i>
+                </template>
+                <template v-slot:right-text>
+                    <router-link :to="{name: 'mi-perfil'}">Darme de baja</router-link>
+                </template>
+            </CustomButton>
             
     
         </div>
@@ -58,8 +58,27 @@
                     </div>
                 </div>
             <button class="btn btn-submit" type="submit">Enviar met</button>
-      </form>
-    
+            </form>
+            <div class="form-title-section-2">
+                <h1 class="form-title">La gente a la que sigues ha publicado...</h1>
+                <CustomButton>
+                    <template v-slot:left-icon>
+                        <span class="material-symbols-outlined">stars</span>
+                    </template>
+                    <template v-slot:right-text>
+                        <router-link :to="{name: 'login'}">Ver mis mets</router-link>
+                    </template>
+                </CustomButton>
+            </div>
+
+            <div class="mets-list">
+                <div v-if="isLoading">Cargando mets...</div>
+                <div class="mets" v-else>
+                <MetDetail v-for="met in mets" :key="met" :met="met" 
+                @goProfile="goProfile"/>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -73,14 +92,38 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import NavBarPrivate from '@/components/NavBarPrivate.vue';
+import useMets from '@/composable/useMet';
+import MetDetail from '@/components/MetDetail.vue';
+import CustomButton from '@/components/CustomButton.vue';
+import { useRouter } from 'vue-router';
+import { Met } from '@/models/mets';
+// import useUsers from '@/composable/useUsers';
 
 export default defineComponent({
     components: {
         NavBarPrivate,
+        MetDetail,
+        CustomButton
     },
-    setup() {
+    props: {
+        id: {
+            type: String,
+            required: true
+        },
+    },
+
+    setup(props) {
+        // const { user, fetchUserById } = useUsers()
+        const { mets, isLoading, fetchMets } = useMets()
+        const router = useRouter()
+        fetchMets()
+        // fetchUserById(props.id)
         
-        return {}
+        return {
+            mets,
+            isLoading,
+            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
+        }
     },
 })
 </script>
@@ -96,7 +139,11 @@ export default defineComponent({
 .column1 {
     background-color: #333333;
     width: 25%;
-    height: 100%;
+    min-height: 3000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .column2 {
@@ -182,21 +229,39 @@ export default defineComponent({
 .form {
   background-color: black;
   border: 1px solid #bc2025;
-  max-width: 800px;
+  max-width: 600px;
   align-self: center;
   margin: 20px auto;
   margin-top: 20px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
 .form-title-section {
   display: flex;
   flex-direction: row;
-  
+  align-items: end;
+  justify-content: center;
   width: 100%;
   margin: 0;
   padding: 0;
 }
+
+.form-title-section-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.form-title-section-2 > img {
+    color: white;
+    margin-right: 50px;
+}
+
 
 .form-title {
   font-weight: 700;
@@ -260,5 +325,20 @@ export default defineComponent({
   outline: 0 none;
 }
 
+.mets-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.bi, span {
+    margin-right: 10px;
+}
+
+.btn-outline-success {
+    margin-bottom: 50px;
+}
 
 </style>

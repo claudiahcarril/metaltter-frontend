@@ -5,7 +5,7 @@
         </div>
         <div class="met-body">
             <div class="met-name" @click="$emit('goProfile', met)">{{ met.postedBy.name}}</div>
-            <div class="met-username">@{{ met.postedBy.username }}</div>
+            <div class="met-username" @click="$emit('goProfile', met)">@{{ met.postedBy.username }}</div>
             <div class="met-content">{{ met.message }}</div>
             <div v-if="met.image !== ''" class="met-image">
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
@@ -66,6 +66,7 @@ export default defineComponent({
 .met-avatar > img {
     border-radius: 50%;
     margin: 15px 0 0 15px;
+    cursor: pointer;
 }
 
 .met-body {
@@ -81,6 +82,7 @@ export default defineComponent({
     font-size: x-large;
     color: black;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .met-username {
@@ -88,6 +90,7 @@ export default defineComponent({
     color: black;
     font-weight: 600;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .met-content {
