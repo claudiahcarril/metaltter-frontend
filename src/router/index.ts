@@ -31,9 +31,12 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/mi-perfil',
+    path: '/users/:id/mi-perfil',
     name: 'mi-perfil',
-    component: () => import(/* webpackChunkName: "mi-perfil" */ '../views/MyProfileView.vue')
+    component: () => import(/* webpackChunkName: "mi-perfil" */ '../views/MyProfileView.vue'),
+    props: (route) => {
+      return { id: route.params.id }
+    }
   }
 ]
 
