@@ -8,3 +8,8 @@ export interface User {
     followers: number,
     following: number,
 }
+
+export interface Credentials {
+    username: string;
+    password: string;
+}
