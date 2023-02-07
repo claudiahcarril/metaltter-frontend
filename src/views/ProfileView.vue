@@ -65,6 +65,10 @@ export default defineComponent({
             type: String,
             required: true
         },
+        username: {
+            type: String,
+            required: true
+        },
     },
     
     setup(props) {

@@ -6,9 +6,12 @@ import { IUserState } from "./state";
 
 const actions: ActionTree<IUserState, IState> = {
     async login ({ commit }, credentials: Credentials) {
-        const {data} = await metaltterApi.post('/login', {...credentials})
+        const {data} = await metaltterApi.post('/auth/login', {...credentials})
         localStorage.setItem('token', data.access_token )
         commit('setToken', data.access_token)
+        const response = await metaltterApi.get('/auth/profile')
+        console.log(response.data)
+        commit('setUser', response.data)
     },
 
     async deleteToken({ commit }) {

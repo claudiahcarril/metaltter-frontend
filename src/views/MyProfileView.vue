@@ -9,7 +9,7 @@
                 </div>
                 <div class="user-body">
                     <div class="user-name">{{ user.name }}</div>
-                    <div class="user-username">@{{ user.username }}</div>
+                    <div class="user-username">@{{ user.username }} </div>
                     <div class="follow">
                         <div class="followers">
                             <div class="met-kudos">Seguidores: {{ user.followers }}</div>
@@ -99,6 +99,7 @@ import CustomButton from '@/components/CustomButton.vue';
 // import { Met } from '@/models/mets';
 import useUsers from '@/composable/useUsers';
 import config from '@/config';
+import useLogin from '@/composable/useLogin';
 
 export default defineComponent({
     components: {
@@ -106,20 +107,13 @@ export default defineComponent({
         MetDetailPrivate,
         CustomButton
     },
-    props: {
-        id: {
-            type: String,
-            required: true
-        },
-    },
 
-    setup(props) {
-        const { user, fetchUserById } = useUsers()
+    setup() {
         const { mets, isLoading, userMets, fetchMets, fetchMetsPostedByUser } = useMets()
+        const { user } = useLogin()
         // const router = useRouter()
-        fetchMets()
-        fetchUserById(props.id)
-        fetchMetsPostedByUser(props.id)
+ 
+        fetchMetsPostedByUser(user.value._id)
         
         return {
             imagesUrl: config.imagesUrl,
