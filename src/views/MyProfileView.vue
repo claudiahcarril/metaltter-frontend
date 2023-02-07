@@ -61,13 +61,13 @@
             </form>
 
             <div class="form-title-section-2">
-                <h1 class="form-title">La gente a la que sigues ha publicado...</h1>
+                <h1 class="form-title-2">VER MIS METS</h1>
                 <CustomButton>
                     <template v-slot:left-icon>
-                        <span class="material-symbols-outlined">stars</span>
+                        <i class="bi bi-arrow-down-circle-fill"></i>
                     </template>
                     <template v-slot:right-text>
-                        <router-link :to="{name: 'login'}">Ver mis mets</router-link>
+                        <router-link :to="{name: 'login'}">Ver más recientes</router-link>
                     </template>
                 </CustomButton>
             </div>
@@ -75,8 +75,7 @@
             <div class="mets-list">
                 <div v-if="isLoading">Cargando mets...</div>
                 <div class="mets" v-else>
-                <MetDetail v-for="met in mets" :key="met" :met="met" 
-                @goProfile="goProfile"/>
+                    <MetDetailPrivate v-for="met in userMets" :key="met" :met="met"></MetDetailPrivate>
                 </div>
             </div>
 
@@ -94,17 +93,17 @@
 import { defineComponent } from 'vue'
 import NavBarPrivate from '@/components/NavBarPrivate.vue';
 import useMets from '@/composable/useMet';
-import MetDetail from '@/components/MetDetail.vue';
+import MetDetailPrivate from '@/components/MetDetailPrivate.vue';
 import CustomButton from '@/components/CustomButton.vue';
-import { useRouter } from 'vue-router';
-import { Met } from '@/models/mets';
+// import { useRouter } from 'vue-router';
+// import { Met } from '@/models/mets';
 import useUsers from '@/composable/useUsers';
 import config from '@/config';
 
 export default defineComponent({
     components: {
         NavBarPrivate,
-        MetDetail,
+        MetDetailPrivate,
         CustomButton
     },
     props: {
@@ -116,17 +115,19 @@ export default defineComponent({
 
     setup(props) {
         const { user, fetchUserById } = useUsers()
-        const { mets, isLoading, fetchMets } = useMets()
-        const router = useRouter()
+        const { mets, isLoading, userMets, fetchMets, fetchMetsPostedByUser } = useMets()
+        // const router = useRouter()
         fetchMets()
         fetchUserById(props.id)
+        fetchMetsPostedByUser(props.id)
         
         return {
             imagesUrl: config.imagesUrl,
             user,
             mets,
+            userMets,
             isLoading,
-            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
+            // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
         }
     },
 })
@@ -256,8 +257,22 @@ export default defineComponent({
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  margin: 0;
+  margin: 50px 0 0 0;
   padding: 0;
+}
+
+.form-title-2 {
+  font-weight: 700;
+  padding: 5px;
+  color: black;
+  font-size: 2.5rem;
+  margin: 0;
+  padding-top: 15px;
+  margin-right: 280px;
+}
+
+.form-title-section-2 > button {
+    margin-bottom: 0;
 }
 
 .form-title-section-2 > img {
@@ -334,8 +349,6 @@ export default defineComponent({
     align-items: center;
 }
 
-
-
 .bi, span {
     margin-right: 10px;
 }
@@ -344,4 +357,12 @@ export default defineComponent({
     margin-bottom: 50px;
 }
 
+a, i {
+    text-decoration: none;
+    color: white;
+}
+
+a:active, i:active {
+    color: black;
+}
 </style>

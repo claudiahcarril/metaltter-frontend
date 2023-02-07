@@ -8,6 +8,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "home-public" */ '../views/HomePublicView.vue')
   },
   {
+    path: '/:id',
+    name: 'home-private',
+    component: () => import(/* webpackChunkName: "home-private" */ '../views/HomePrivateView.vue'),
+    props: (route) => {
+      return { id: route.params.id }
+    }
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue')
@@ -31,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/users/:id/mi-perfil',
+    path: '/users/mi-perfil/:id',
     name: 'mi-perfil',
     component: () => import(/* webpackChunkName: "mi-perfil" */ '../views/MyProfileView.vue'),
     props: (route) => {

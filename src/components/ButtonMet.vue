@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'CustomButton',
+    name: 'ButtonMet',
 })
 </script>
 
@@ -22,16 +22,18 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
-    background-color: #bc2025;
+    background-color: black;
     border: none;
-    height: 40px;
-    min-width: 120px;
+    height: 25px;
+    min-width: 95px;
     padding: 10px 15px 10px 15px;
-    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
+    font-weight: 300;
     color: white;
     transition: all 0.3s ease-in-out;
+    text-decoration: none;
 }
 
 
