@@ -28,8 +28,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
-// import useLogin from '@/composable/useLogin'
-// import router from '@/router';
+import useLogin from '@/composable/useLogin'
+import router from '@/router';
 
 export default defineComponent({
     components: {
@@ -37,7 +37,7 @@ export default defineComponent({
     },
 
     setup () {
-    // const { login } = useLogin()
+    const { login } = useLogin()
     const username = ref<string>('');
     const password = ref<string>('');
 
@@ -45,9 +45,9 @@ export default defineComponent({
       username, 
       password,
       async sendForm() {
-        // const credentials = { username: username.value, password: password.value }
-        // await login(credentials)
-        // router.push({name: 'list-products'})
+        const credentials = { username: username.value, password: password.value }
+        await login(credentials)
+        router.push({name: 'home-public'})
       }
     }
 

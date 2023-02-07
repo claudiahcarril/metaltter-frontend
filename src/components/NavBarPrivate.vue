@@ -12,7 +12,7 @@
                     <router-link :to="{name: 'mi-perfil'}">Mi perfil</router-link>
                 </template>
             </CustomButton>
-            <CustomButton>
+            <CustomButton @click="removeToken">
                 <template v-slot:left-icon>
                     <span class="material-symbols-outlined">logout</span>
                 </template>
@@ -26,6 +26,8 @@
 
 
 <script lang="ts">
+import useLogin from '@/composable/useLogin';
+import router from '@/router';
 import { defineComponent } from 'vue'
 import CustomButton from './CustomButton.vue';
 
@@ -33,8 +35,20 @@ export default defineComponent({
     name: 'NavBarPublic',
     components: {
         CustomButton,
+    },
+
+    setup() {
+        const { deleteToken } = useLogin()
+
+        return {
+            removeToken() {
+                deleteToken()
+                router.push({name: 'login'})
+            } 
+        }
     }
 })
+
 </script>
 
 
