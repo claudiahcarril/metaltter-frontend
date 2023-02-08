@@ -20,7 +20,6 @@ const actions: ActionTree<IUserState, IState> = {
     async addUser({commit}, register: Register) {
         const {data} = await metaltterApi.post<unknown, AxiosResponse<User>>('/users', register)
         commit('addUser', data)
-        console.log(data)
     }
 }
 

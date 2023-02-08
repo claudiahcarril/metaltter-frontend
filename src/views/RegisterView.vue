@@ -33,6 +33,7 @@ import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
 import useUsers from '@/composable/useUsers';
 import router from '@/router';
+import useLogin from '@/composable/useLogin';
 
 export default defineComponent({
     components: {
@@ -41,6 +42,7 @@ export default defineComponent({
 
     setup () {
     const { addUser } = useUsers()
+    const { login } = useLogin()
     const username = ref<string>('')
     const email = ref<string>('')
     const password = ref<string>('')
@@ -52,7 +54,8 @@ export default defineComponent({
       password,
       async sendRegister() {
         let newUser = { email: email.value, username: username.value, password: password.value }
-        addUser(newUser)
+        await addUser(newUser)
+        await login(newUser)
         router.push({name: `mi-perfil`})
       }
     }
