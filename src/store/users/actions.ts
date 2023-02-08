@@ -1,7 +1,7 @@
 import metaltterApi from "@/api/metaltterApi";
 import { Register, User } from "@/models/users";
 import { AxiosResponse } from "axios";
-import { ActionTree } from "vuex";
+import { ActionTree, Commit } from "vuex";
 import { IState } from "..";
 import { IUserState } from "./state";
 
@@ -20,6 +20,11 @@ const actions: ActionTree<IUserState, IState> = {
     async addUser({commit}, register: Register) {
         const {data} = await metaltterApi.post<unknown, AxiosResponse<User>>('/users', register)
         commit('addUser', data)
+    },
+
+    async removeUser({commit}, userId: number) {
+        const {data} = await metaltterApi.delete<unknown, AxiosResponse<User>>(`/users/${userId}`)
+        commit('removeUser', data)
     }
 }
 

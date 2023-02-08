@@ -16,7 +16,7 @@ const mutations: MutationTree<IUserState> = {
     },
 
     removeUser(state, user: User) {
-        const tmp = state.users.filter(u => u.username !== user.username)
+        const tmp = state.users.filter(u => u._id !== user._id)
         state.users = tmp
     }
 }

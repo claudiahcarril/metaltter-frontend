@@ -22,12 +22,12 @@
                     </div>
                 </div>
             </div>
-            <CustomButton>
+            <CustomButton @click="unsubscribeUser(user._id)">
                 <template v-slot:left-icon>
                     <i class="bi bi-person-circle"></i>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'mi-perfil'}">Darme de baja</router-link>
+                    <span>Darme de baja</span>
                 </template>
             </CustomButton>
             
@@ -95,7 +95,7 @@ import NavBarPrivate from '@/components/NavBarPrivate.vue';
 import useMets from '@/composable/useMet';
 import MetDetailPrivate from '@/components/MetDetailPrivate.vue';
 import CustomButton from '@/components/CustomButton.vue';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 // import { Met } from '@/models/mets';
 import useUsers from '@/composable/useUsers';
 import config from '@/config';
@@ -109,9 +109,10 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, userMets, fetchMets, fetchMetsPostedByUser } = useMets()
+        const { mets, isLoading, userMets, fetchMetsPostedByUser } = useMets()
         const { user } = useLogin()
-        // const router = useRouter()
+        const { removeUser } = useUsers()
+        const router = useRouter()
  
         fetchMetsPostedByUser(user.value._id)
         
@@ -121,6 +122,10 @@ export default defineComponent({
             mets,
             userMets,
             isLoading,
+            unsubscribeUser: () => {
+                removeUser(user.value._id)
+                router.push({name: `login`})
+            }
             // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
         }
     },
