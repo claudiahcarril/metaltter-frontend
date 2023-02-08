@@ -17,7 +17,7 @@
                     <span class="material-symbols-outlined">logout</span>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'login'}">Cerrar sesión</router-link>
+                    <span>Cerrar sesión</span>
                 </template>
             </CustomButton>
         </div>

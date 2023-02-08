@@ -1,7 +1,7 @@
 import metaltterApi from "@/api/metaltterApi";
 import { Register, User } from "@/models/users";
 import { AxiosResponse } from "axios";
-import { ActionTree, Commit } from "vuex";
+import { ActionTree } from "vuex";
 import { IState } from "..";
 import { IUserState } from "./state";
 

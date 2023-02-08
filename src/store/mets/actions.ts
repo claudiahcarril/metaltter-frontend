@@ -16,6 +16,16 @@ const actions: ActionTree<IMetState, IState> = {
     async fetchMetsPostedByUser({commit}, userId: string) {
         const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}`)
         commit('setMetsPostedByUser', data)
+    },
+
+    async addMet({commit}, met: Met) {
+        const {data} = await metaltterApi.post<unknown, AxiosResponse<Met>>('/mets', met)
+        commit('addMet', data)
+    },
+
+    async removeMet({commit}, metId: number) {
+        const {data} = await metaltterApi.delete<unknown, AxiosResponse<Met>>(`/mets/${metId}`)
+        commit('removeMet', data)
     }
 }
 

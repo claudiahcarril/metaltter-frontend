@@ -1,3 +1,4 @@
+import { Met } from "@/models/mets"
 import { computed } from "vue"
 import { useStore } from "vuex"
 
@@ -12,7 +13,9 @@ const useMets = () => {
 
         // ACTIONS
         fetchMets: () => store.dispatch('mets/fetchMets'),
-        fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId)
+        fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId),
+        addMet: (met: Met) => store.dispatch('mets/addMet', met),
+        removeMet: (met: Met) => store.dispatch('mets/removeMet', met),
     }
 }
 

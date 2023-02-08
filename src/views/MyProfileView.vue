@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <CustomButton @click="unsubscribeUser(user._id)">
+            <CustomButton @click="unsubscribeUser()">
                 <template v-slot:left-icon>
                     <i class="bi bi-person-circle"></i>
                 </template>
@@ -51,10 +51,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <input v-model="dateCreated" type="date" class="form-control" placeholder="¿Cuándo lo quieres publicar?" required>
+                        <input v-model="dateCreated" type="date" class="form-control" required>
                     </div>
                     <div class="col-sm-4">
-                        <input v-model="dateCreated" type="time" class="form-control" placeholder="¿Cuándo lo quieres publicar?" required>
+                        <!-- <input v-model="dateCreated" type="time" class="form-control" required> -->
                     </div>
                 </div>
             <button class="btn btn-submit" type="submit">Enviar met</button>
@@ -90,7 +90,7 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import NavBarPrivate from '@/components/NavBarPrivate.vue';
 import useMets from '@/composable/useMet';
 import MetDetailPrivate from '@/components/MetDetailPrivate.vue';
@@ -109,12 +109,16 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, userMets, fetchMetsPostedByUser } = useMets()
-        const { user } = useLogin()
+        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet } = useMets()
+        const { user, deleteToken } = useLogin()
         const { removeUser } = useUsers()
         const router = useRouter()
  
         fetchMetsPostedByUser(user.value._id)
+
+        const message = ref<string>('');
+        const image = ref<string>('');
+        const dateCreated = ref<string>('');
         
         return {
             imagesUrl: config.imagesUrl,
@@ -122,10 +126,19 @@ export default defineComponent({
             mets,
             userMets,
             isLoading,
+            message,
+            image,
+            dateCreated,
             unsubscribeUser: () => {
                 removeUser(user.value._id)
+                deleteToken()
                 router.push({name: `login`})
-            }
+            },
+            async sendMet() {
+                const newMet = {message: message.value, image: image.value, dateCreated: dateCreated.value, postedBy: user.value._id}
+                await addMet(newMet)
+                fetchMetsPostedByUser(user.value._id)
+            },
             // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
         }
     },
