@@ -10,7 +10,6 @@ const actions: ActionTree<IUserState, IState> = {
         localStorage.setItem('token', data.access_token )
         commit('setToken', data.access_token)
         const response = await metaltterApi.get('/auth/profile')
-        console.log(response.data)
         commit('setUser', response.data)
     },
 

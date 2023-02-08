@@ -1,6 +1,6 @@
 <template>
     <NavBarPublic />
-    <form @submit.prevent="sendForm" class="form">
+    <form @submit.prevent="sendRegister" class="form">
     <div class="form-title-section">
       <h1 class="form-title">Crea una cuenta en</h1>
       <img src="../assets/metaltterLogo.png" alt="">
@@ -14,7 +14,7 @@
     <div class="row">
       <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <input v-model="password" type="email" class="form-control" id="inputEmail" placeholder="Añade una dirección de correo" required>
+        <input v-model="email" type="email" class="form-control" id="inputEmail" placeholder="Añade una dirección de correo" required>
       </div>
     </div>
     <div class="row">
@@ -31,8 +31,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
-// import useLogin from '@/composable/useLogin'
-// import router from '@/router';
+import useUsers from '@/composable/useUsers';
+import router from '@/router';
 
 export default defineComponent({
     components: {
@@ -40,17 +40,20 @@ export default defineComponent({
     },
 
     setup () {
-    // const { login } = useLogin()
-    const username = ref<string>('');
-    const password = ref<string>('');
-
+    const { addUser } = useUsers()
+    const username = ref<string>('')
+    const email = ref<string>('')
+    const password = ref<string>('')
+    
+    
     return {
+      email,
       username, 
       password,
-      async sendForm() {
-        // const credentials = { username: username.value, password: password.value }
-        // await login(credentials)
-        // router.push({name: 'list-products'})
+      async sendRegister() {
+        let newUser = { email: email.value, username: username.value, password: password.value }
+        addUser(newUser)
+        router.push({name: `mi-perfil`})
       }
     }
 

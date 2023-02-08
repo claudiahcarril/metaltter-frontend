@@ -10,6 +10,7 @@ const mutations: MutationTree<IUserState> = {
     setSelectedUser(state, user: User) {
         state.selectedUser = user
     },
+    
     addUser(state, user: User) {
         state.users.push(user)
     },

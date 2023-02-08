@@ -1,5 +1,5 @@
 import metaltterApi from "@/api/metaltterApi";
-import { User } from "@/models/users";
+import { Register, User } from "@/models/users";
 import { AxiosResponse } from "axios";
 import { ActionTree } from "vuex";
 import { IState } from "..";
@@ -15,6 +15,12 @@ const actions: ActionTree<IUserState, IState> = {
     async fetchUserById({commit}, userId: string) {
         const {data} = await metaltterApi.get<unknown, AxiosResponse<User>>(`/users/${userId}`)
         commit('setSelectedUser', data)
+    },
+
+    async addUser({commit}, register: Register) {
+        const {data} = await metaltterApi.post<unknown, AxiosResponse<User>>('/users', register)
+        commit('addUser', data)
+        console.log(data)
     }
 }
 
