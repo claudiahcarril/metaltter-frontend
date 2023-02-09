@@ -5,7 +5,7 @@
     <div class="list-mets">
         <div class="home-info">
             <h1 class="h1">Últimas publicaciones</h1>
-            <CustomButton v-on:click="getOldMets">
+            <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
                 </template>
@@ -13,7 +13,7 @@
                     <span>Ver mets antiguos</span>
                 </template>
             </CustomButton>
-            <CustomButton v-on:click="getNewMets">
+            <CustomButton v-on:click="getNewMets" v-else>
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-up-circle"></i>
                 </template>
@@ -55,20 +55,23 @@ export default defineComponent({
     setup() {
         const { mets, isLoading, fetchMets, fetchMetsByDate } = useMets()
         const router = useRouter()
+        let sorting = ref<string>('descending')
         fetchMets()
 
-        const click = ref<string>('')
 
         return {
-            click,
+            sorting,
             mets,
             isLoading,
             goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}}),
 
             async getOldMets() {
+                sorting.value = 'descending'
+                console.log(sorting.value)
                 fetchMetsByDate()
             },
             async getNewMets() {
+                sorting.value = 'ascending'
                 fetchMets()
             }
             

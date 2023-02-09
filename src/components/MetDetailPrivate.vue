@@ -11,7 +11,7 @@
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
             </div>
             <div v-else></div>
-            <div class="kudos">
+            <div class="kudos" @click="counter++">
                 <img src="../assets/hand.png" alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
             </div>
@@ -24,7 +24,7 @@
                         <i class="bi bi-pencil-fill"></i>
                     </template>
                     <template v-slot:right-text>
-                        <router-link :to="{name: 'login'}">Editar</router-link>
+                        <span>Editar</span>
                     </template>
                 </ButtonMet>
                 <ButtonMet>
@@ -32,7 +32,7 @@
                         <i class="bi bi-trash"></i>
                     </template>
                     <template v-slot:right-text>
-                        <router-link :to="{name: 'login'}">Borrar</router-link>
+                        <span>Borrar</span>
                     </template>
                 </ButtonMet>
             </div>
@@ -45,7 +45,7 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
 import ButtonMet from './ButtonMet.vue'
@@ -63,8 +63,14 @@ export default defineComponent({
         },
     },
 
-    setup() {
-        return{ imagesUrl: config.imagesUrl }
+    setup(props) {
+        const counter = ref<number>(props.met.kudos)
+
+        return{ 
+            counter,
+            imagesUrl: config.imagesUrl,
+            
+         }
     }
 
 })
@@ -93,7 +99,6 @@ export default defineComponent({
 .met-avatar > img {
     border-radius: 50%;
     margin: 15px 0 0 15px;
-    cursor: pointer;
 }
 
 .met-body {
@@ -109,7 +114,6 @@ export default defineComponent({
     font-size: x-large;
     color: black;
     font-weight: 700;
-    cursor: pointer;
 }
 
 .met-username {
@@ -117,7 +121,6 @@ export default defineComponent({
     color: black;
     font-weight: 600;
     margin-bottom: 10px;
-    cursor: pointer;
 }
 
 .met-content {
@@ -147,6 +150,7 @@ export default defineComponent({
     font-size: 20px;
     align-items: center;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .met-datecreated {

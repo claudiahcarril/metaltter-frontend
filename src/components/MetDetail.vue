@@ -37,7 +37,10 @@ export default defineComponent({
     },
 
     setup() {
-        return{ imagesUrl: config.imagesUrl }
+        return{ 
+            imagesUrl: config.imagesUrl,
+            
+        }
     }
 
 })
