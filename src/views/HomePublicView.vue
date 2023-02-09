@@ -67,7 +67,6 @@ export default defineComponent({
 
             async getOldMets() {
                 sorting.value = 'descending'
-                console.log(sorting.value)
                 fetchMetsByDate()
             },
             async getNewMets() {

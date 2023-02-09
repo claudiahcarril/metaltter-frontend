@@ -25,6 +25,11 @@ const actions: ActionTree<IMetState, IState> = {
         commit('setMetsPostedByUser', data)
     },
 
+    async fetchMetsPostedByUserDate({commit}, userId: string) {
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}?sort=descending`)
+        commit('setMetsPostedByUserDate', data)
+    },
+
     async addMet({commit}, met: Met) {
         const {data} = await metaltterApi.post<unknown, AxiosResponse<Met>>('/mets', met)
         commit('addMet', data)

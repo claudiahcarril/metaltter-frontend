@@ -23,6 +23,10 @@ const mutations: MutationTree<IMetState> = {
         state.metsPostedByUser = userMets
     },
 
+    setMetsPostedByUserDate(state: IMetState, userMets: Met[]) {
+        state.metsPostedByUser = userMets
+    },
+
     addMet(state, met: Met) {
         state.mets.push(met)
     },

@@ -23,26 +23,34 @@
     </div>
     <div class="list-mets">
         <div class="home-info">
-            <h1 class="h1">Últimas publicaciones de @{{ user.username }}</h1>
-            <CustomButton>
+            <h1 class="h1">Últimas publicaciones</h1>
+            <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'login'}">Ver más recientes</router-link>
+                    <span>Ver mets antiguos</span>
+                </template>
+            </CustomButton>
+            <CustomButton v-on:click="getNewMets" v-else>
+                <template v-slot:left-icon>
+                    <i class="bi bi-arrow-up-circle"></i>
+                </template>
+                <template v-slot:right-text>
+                    <span>Ver mets recientes</span>
                 </template>
             </CustomButton>
         </div>
+    </div>
         <div v-if="isLoading">Cargando mets...</div>
         <div class="mets-list" v-else>
             <MetDetail v-for="met in userMets" :key="met" :met="met"></MetDetail>
         </div>
-    </div>
 </template>
 
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import useUsers from '@/composable/useUsers';
@@ -73,20 +81,31 @@ export default defineComponent({
     
     setup(props) {
         const { user, fetchUserById } = useUsers()
-        const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser } = useMets()
+        const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser, fetchMetsPostedByUserDate } = useMets()
         
+        let sorting = ref<string>('descending')
         fetchUserById(props.id)
         fetchMetsPostedByUser(props.id)
 
 
         return {
             imagesUrl: config.imagesUrl,
+            sorting,
             user,
             mets,
             userMets,
             isLoading,
             fetchMets,
-            fetchMetsPostedByUser          
+            fetchMetsPostedByUser,
+
+            async getOldMets() {
+                sorting.value = 'descending'
+                fetchMetsPostedByUserDate(props.id)
+            },
+            async getNewMets() {
+                sorting.value = 'ascending'
+                fetchMetsPostedByUser(props.id)
+            }          
         }
     }
 
@@ -200,6 +219,9 @@ a:active {
     color: white;
 }
 
+span {
+    margin-left: 10px;
+}
 
 
 </style>

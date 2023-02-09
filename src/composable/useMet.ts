@@ -15,6 +15,7 @@ const useMets = () => {
         fetchMets: () => store.dispatch('mets/fetchMets'),
         fetchMetsByDate: () => store.dispatch('mets/fetchMetsByDate'),
         fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId),
+        fetchMetsPostedByUserDate: (userId: string) => store.dispatch('mets/fetchMetsPostedByUserDate', userId),
         addMet: (met: Met) => store.dispatch('mets/addMet', met),
         removeMet: (met: Met) => store.dispatch('mets/removeMet', met),
     }

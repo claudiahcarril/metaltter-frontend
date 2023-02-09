@@ -62,14 +62,22 @@
 
             <div class="form-title-section-2">
                 <h1 class="form-title-2">VER MIS METS</h1>
-                <CustomButton @click="getOldMets()">
-                    <template v-slot:left-icon>
-                        <i class="bi bi-arrow-down-circle-fill"></i>
-                    </template>
-                    <template v-slot:right-text>
-                        <span>Ver más antiguos</span>
-                    </template>
-                </CustomButton>
+                <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
+                <template v-slot:left-icon>
+                    <i class="bi bi-arrow-down-circle-fill"></i>
+                </template>
+                <template v-slot:right-text>
+                    <span>Ver mets antiguos</span>
+                </template>
+            </CustomButton>
+            <CustomButton v-on:click="getNewMets" v-else>
+                <template v-slot:left-icon>
+                    <i class="bi bi-arrow-up-circle"></i>
+                </template>
+                <template v-slot:right-text>
+                    <span>Ver mets recientes</span>
+                </template>
+            </CustomButton>
             </div>
 
             <div class="mets-list">
@@ -109,10 +117,12 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsByDate } = useMets()
+        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsPostedByUserDate } = useMets()
         const { user, deleteToken } = useLogin()
         const { removeUser } = useUsers()
         const router = useRouter()
+
+        let sorting = ref<string>('descending')
  
         fetchMetsPostedByUser(user.value._id)
 
@@ -122,6 +132,7 @@ export default defineComponent({
         
         return {
             imagesUrl: config.imagesUrl,
+            sorting,
             user,
             mets,
             userMets,
@@ -140,8 +151,13 @@ export default defineComponent({
                 fetchMetsPostedByUser(user.value._id)
             },
             async getOldMets() {
-                fetchMetsByDate()
-            } 
+                sorting.value = 'descending'
+                fetchMetsPostedByUserDate(user.value._id)
+            },
+            async getNewMets() {
+                sorting.value = 'ascending'
+                fetchMetsPostedByUser(user.value._id)
+            }   
             // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
         }
     },
