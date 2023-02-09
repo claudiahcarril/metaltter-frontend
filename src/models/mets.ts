@@ -6,5 +6,13 @@ export interface Met {
     image: string,
     message: string,
     kudos: number,
-    dateCreated: Date,
+    dateCreated: string,
+}
+
+
+export interface newMet {
+    postedBy: User,
+    image: string,
+    message: string,
+    dateCreated: string,
 }

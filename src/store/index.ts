@@ -15,6 +15,6 @@ export default createStore({
   modules: {
     mets: metsModule,
     users: usersModule,
-    login: loginModule
+    login: loginModule,
   }
 })

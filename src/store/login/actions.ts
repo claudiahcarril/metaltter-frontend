@@ -18,6 +18,10 @@ const actions: ActionTree<IUserState, IState> = {
         localStorage.removeItem('token')
         commit('removeToken')
     }
+
+    // GET kudos userId: number
+
+    // POST addKudos
 }
 
 
