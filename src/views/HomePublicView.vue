@@ -5,12 +5,20 @@
     <div class="list-mets">
         <div class="home-info">
             <h1 class="h1">Últimas publicaciones</h1>
-            <CustomButton>
+            <CustomButton v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'login'}">Ver más recientes</router-link>
+                    <span>Ver mets antiguos</span>
+                </template>
+            </CustomButton>
+            <CustomButton v-on:click="getNewMets">
+                <template v-slot:left-icon>
+                    <i class="bi bi-arrow-up-circle"></i>
+                </template>
+                <template v-slot:right-text>
+                    <span>Ver mets recientes</span>
                 </template>
             </CustomButton>
         </div>
@@ -26,7 +34,7 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
 import SearchBar from '@/components/SearchBar.vue'
 import MetDetail from '@/components/MetDetail.vue';
@@ -45,14 +53,24 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, fetchMets } = useMets()
+        const { mets, isLoading, fetchMets, fetchMetsByDate } = useMets()
         const router = useRouter()
         fetchMets()
 
+        const click = ref<string>('')
+
         return {
+            click,
             mets,
             isLoading,
-            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
+            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}}),
+
+            async getOldMets() {
+                fetchMetsByDate()
+            },
+            async getNewMets() {
+                fetchMets()
+            }
             
         }
     }
@@ -108,5 +126,8 @@ a:active {
     color: white;
 }
 
+span {
+    margin-left: 10px;
+}
 
 </style>

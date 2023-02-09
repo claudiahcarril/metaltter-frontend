@@ -9,7 +9,8 @@ export interface IMetState {
 
 export interface MetParams {
     page: number
-    postedBy: string
+    sort: string
+    message: string
 }
 
 function state(): IMetState {

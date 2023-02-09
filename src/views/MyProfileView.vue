@@ -62,12 +62,12 @@
 
             <div class="form-title-section-2">
                 <h1 class="form-title-2">VER MIS METS</h1>
-                <CustomButton>
+                <CustomButton @click="getOldMets()">
                     <template v-slot:left-icon>
                         <i class="bi bi-arrow-down-circle-fill"></i>
                     </template>
                     <template v-slot:right-text>
-                        <router-link :to="{name: 'login'}">Ver más recientes</router-link>
+                        <span>Ver más antiguos</span>
                     </template>
                 </CustomButton>
             </div>
@@ -109,7 +109,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet } = useMets()
+        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsByDate } = useMets()
         const { user, deleteToken } = useLogin()
         const { removeUser } = useUsers()
         const router = useRouter()
@@ -139,6 +139,9 @@ export default defineComponent({
                 await addMet(newMet)
                 fetchMetsPostedByUser(user.value._id)
             },
+            async getOldMets() {
+                fetchMetsByDate()
+            } 
             // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
         }
     },

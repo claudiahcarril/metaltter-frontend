@@ -7,6 +7,10 @@ const mutations: MutationTree<IMetState> = {
         state.mets = mets
     },
 
+    setMetsByDate(state: IMetState, mets: Met[]) {
+        state.mets = mets
+    },
+
     setIsLoading(state: IMetState, value: boolean) {
         state.isLoading = value
     },
