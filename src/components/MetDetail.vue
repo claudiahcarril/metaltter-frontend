@@ -101,6 +101,10 @@ export default defineComponent({
 }
 
 
+.met-image > img {
+    max-width: 350px;
+}
+
 .kudos {
     display: flex;
     flex-direction: row;

@@ -134,6 +134,11 @@ export default defineComponent({
     align-items: end;
 }
 
+.met-image > img {
+    max-width: 350px;
+}
+
+
 .kudos {
     display: flex;
     flex-direction: row;
