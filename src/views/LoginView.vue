@@ -47,7 +47,7 @@ export default defineComponent({
       async sendForm() {
         const credentials = { username: username.value, password: password.value }
         await login(credentials)
-        router.push({path: `/users/mi-perfil/`})
+        router.push({path: `/mi-perfil/`})
       }
     }
 

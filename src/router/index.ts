@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import haveTokenGuard from './loginGuards'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -37,17 +38,22 @@ const routes: Array<RouteRecordRaw> = [
 
   // PRIVATE PATHS
   {
-    path: '/:id',
+    path: '/',
     name: 'home-private',
+    beforeEnter: [haveTokenGuard],
     component: () => import(/* webpackChunkName: "home-private" */ '../views/HomePrivateView.vue'),
-    props: (route) => {
-      return { id: route.params.id }
-    }
   },
   {
-    path: '/users/mi-perfil/',
+    path: '/mi-perfil/',
     name: 'mi-perfil',
+    beforeEnter: [haveTokenGuard],
     component: () => import(/* webpackChunkName: "mi-perfil" */ '../views/MyProfileView.vue')
+  },
+
+  // NOT FOUND PAGE
+  {
+    path: "/:pathMatch(.*)",
+    component: import(/*webpackChunkName: notFound*/ "../views/NotFoundView.vue"),
   }
 ]
 

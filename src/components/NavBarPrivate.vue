@@ -1,7 +1,9 @@
 <template>
     <nav class="navbar">
-        <a class="navbar-brand" href="#">
-            <img src="../assets/metaltterLogo.png" alt="Metaltter" width="202" height="54">
+        <a class="navbar-brand" >
+            <router-link :to="{name: 'home-private'}">
+                <img src="../assets/metaltterLogo.png" alt="Metaltter" width="202" height="54">
+            </router-link>
         </a>
         <div class="navbar-buttons">
             <CustomButton>

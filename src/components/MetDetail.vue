@@ -38,7 +38,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { user, addKudo } = useLogin()
+        const { addKudo } = useLogin()
 
         const click = ref<string>('');
 

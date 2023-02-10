@@ -4,7 +4,7 @@
 
     <div class="list-mets">
         <div class="home-info">
-            <h1 class="h1">Últimas publicaciones</h1>
+            <h1 class="h1">Últimas publicaciones de la gente que sigues</h1>
             <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
