@@ -26,9 +26,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "recovering-password" */ '../views/PasswordRecoveringView.vue')
   },
   {
-    path: '/users/:id',
+    path: '/:id', 
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
+    component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'), 
     props: (route) => {
       return { id: route.params.id }
     }
@@ -53,6 +53,7 @@ const routes: Array<RouteRecordRaw> = [
   // NOT FOUND PAGE
   {
     path: "/:pathMatch(.*)",
+    name: 'NotFound',
     component: import(/*webpackChunkName: notFound*/ "../views/NotFoundView.vue"),
   }
 ]

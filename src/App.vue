@@ -4,6 +4,23 @@
   <router-view/>
 </template>
 
+<script>
+import { defineComponent } from 'vue'
+import useLogin from './composable/useLogin'
+
+export default defineComponent({
+  setup() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const {setToken} = useLogin()
+      setToken(token)
+    }
+    return {}
+  },
+})
+</script>
+
+
 <style>
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

@@ -1,5 +1,6 @@
 import { User } from "@/models/users";
 import { MutationTree } from "vuex";
+import { IMetState } from "../mets/state";
 import { IUserState } from "./state";
 
 const mutations: MutationTree<IUserState> = {
@@ -20,7 +21,9 @@ const mutations: MutationTree<IUserState> = {
     },
 
     addKudos(state: IUserState, kudo: string) {
-        state.kudos.push(kudo)
+        if (!state.kudos.includes(kudo)) {
+            state.kudos.push(kudo)
+        }
     }
 }
 

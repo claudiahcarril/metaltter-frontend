@@ -12,7 +12,8 @@ const useLogin = () => {
         // ACTIONS
         login: (credentials: Credentials) => store.dispatch('login/login', credentials),
         deleteToken: () => store.dispatch('login/deleteToken'),
-        addKudo: (kudo: string) => store.dispatch('login/addKudo', kudo)
+        addKudo: (metId: string) => store.dispatch('login/addKudo', metId),
+        setToken: (token: string) => store.dispatch('login/setToken', token)
     }
 }
 

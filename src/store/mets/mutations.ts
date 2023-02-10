@@ -34,6 +34,14 @@ const mutations: MutationTree<IMetState> = {
     removeMet(state, met: Met) {
         const tmp = state.mets.filter(m => m._id !== met._id)
         state.mets = tmp
+    },
+
+    addKudos (state, metId: string) {
+        const met = state.mets.find(m => m._id === metId)
+        if (!met) {
+            return
+        }
+        met.kudos++
     }
 }
 

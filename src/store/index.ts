@@ -1,12 +1,14 @@
-import { Met } from '@/models/mets'
 import { createStore } from 'vuex'
 import loginModule from './login'
+import { IUserState } from './login/state'
 import metsModule from './mets'
+import { IMetState } from './mets/state'
 import usersModule from './users'
 
 
 export interface IState {
-  authProduct: Met | null,
+  login: IUserState,
+  mets: IMetState
 }
 
 

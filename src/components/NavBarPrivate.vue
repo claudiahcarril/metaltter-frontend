@@ -8,6 +8,14 @@
         <div class="navbar-buttons">
             <CustomButton>
                 <template v-slot:left-icon>
+                    <i class="bi bi-send"></i>
+                </template>
+                <template v-slot:right-text>
+                    <router-link :to="{name: 'mi-perfil'}">Enviar met</router-link>
+                </template>
+            </CustomButton>
+            <CustomButton>
+                <template v-slot:left-icon>
                     <i class="bi bi-person-circle"></i>
                 </template>
                 <template v-slot:right-text>
@@ -75,6 +83,10 @@ export default defineComponent({
 
 .material-symbols-outlined {
     margin-right: 8px;
+}
+
+.bi {
+    margin-right: 10px;
 }
 
 .material-symbols-outlined:hover {

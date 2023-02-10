@@ -47,9 +47,8 @@ export default defineComponent({
             imagesUrl: config.imagesUrl,
 
             async addKudos() {
-                const kudo = String(props.met._id)
-                console.log(kudo)
-                await addKudo(String(props.met._id))
+                const metId = props.met._id
+                await addKudo(metId)
             }
             
         }

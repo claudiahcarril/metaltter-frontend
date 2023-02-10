@@ -1,7 +1,7 @@
 import { User } from "./users";
 
 export interface Met {
-    _id: number,
+    _id: string,
     postedBy: User,
     image: string,
     message: string,
