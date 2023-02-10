@@ -1,5 +1,7 @@
 import metaltterApi from "@/api/metaltterApi";
+import { Met } from "@/models/mets";
 import { Credentials } from "@/models/users";
+import { AxiosResponse } from "axios";
 import { ActionTree } from "vuex";
 import { IState } from "..";
 import { IUserState } from "./state";
@@ -17,11 +19,20 @@ const actions: ActionTree<IUserState, IState> = {
         localStorage.getItem('token')
         localStorage.removeItem('token')
         commit('removeToken')
-    }
+    },
 
     // GET kudos userId: number
+    // async getKudosByUser({commit}, userId: number) {
+
+    // },
 
     // POST addKudos
+    async addKudo({commit}, kudo: string) {
+        const {data} = await metaltterApi.post('/kudos', kudo)
+        console.log(data)
+        commit('addKudos', data)
+    }
+
 }
 
 

@@ -9,6 +9,10 @@ const getters: GetterTree<IUserState, IState> = {
 
     getToken(state) {
         return state.token
+    },
+
+    getKudos(state) {
+        return state.kudos
     }
 }
 

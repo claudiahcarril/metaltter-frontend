@@ -46,6 +46,16 @@
         <div class="mets-list" v-else>
             <MetDetail v-for="met in userMets" :key="met" :met="met"></MetDetail>
         </div>
+        <div class="button-more">
+        <CustomButton v-on:click="setPage">
+            <template v-slot:left-icon>
+                <i class="bi bi-arrow-down-circle-fill"></i>
+            </template>
+            <template v-slot:right-text>
+                <span>Ver más mets</span>
+            </template>
+        </CustomButton>
+        </div>
 </template>
 
 
@@ -84,6 +94,10 @@ export default defineComponent({
         const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser, fetchMetsPostedByUserDate } = useMets()
         
         let sorting = ref<string>('descending')
+        const page = ref<number>(1)
+        const limit = ref<number>(5)
+
+
         fetchUserById(props.id)
         fetchMetsPostedByUser(props.id)
 
@@ -105,7 +119,14 @@ export default defineComponent({
             async getNewMets() {
                 sorting.value = 'ascending'
                 fetchMetsPostedByUser(props.id)
-            }          
+            },
+            
+            async setPage(page2: number, limit2: number) {
+                page.value = page2
+                limit2 = limit.value + 5
+                console.log(limit2)
+                fetchMets({ page: page2, limit: limit2 })
+            }
         }
     }
 
@@ -222,6 +243,14 @@ a:active {
 span {
     margin-left: 10px;
 }
+
+
+.button-more {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+
 
 
 </style>

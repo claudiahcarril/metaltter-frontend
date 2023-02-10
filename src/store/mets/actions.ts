@@ -8,25 +8,30 @@ import metaltterApi from "@/api/metaltterApi";
 const actions: ActionTree<IMetState, IState> = {
     async fetchMets({ commit }, params: MetParams) {
         commit('setIsLoading', true)
-        // const perPage = 10
+        const perPage = params.limit
         // const skip = (params.page - 1) * perPage
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets`)
+        console.log(perPage)
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?&limit=${perPage}`)
         commit('setMets', data)
         commit('setIsLoading', false)
     },
 
-    async fetchMetsByDate({ commit }) {
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>('/mets?sort=descending')
+    async fetchMetsByDate({ commit }, params: MetParams) {
+        const perPage = params.limit
+        // const skip = (params.page - 1) * perPage
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?sort=descending&limit=${perPage}`)
         commit('setMetsByDate', data)
     },
 
-    async fetchMetsPostedByUser({commit}, userId: string) {
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}`)
+    async fetchMetsPostedByUser({commit}, userId: string, ) {
+        const perPage = 10
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}?&limit=${perPage}`)
         commit('setMetsPostedByUser', data)
     },
 
     async fetchMetsPostedByUserDate({commit}, userId: string) {
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}?sort=descending`)
+        const perPage = 10
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets/postedBy/${userId}?sort=descending&limit=${perPage}`)
         commit('setMetsPostedByUserDate', data)
     },
 
@@ -35,7 +40,7 @@ const actions: ActionTree<IMetState, IState> = {
         commit('addMet', data)
     },
 
-    async removeMet({commit}, metId: number) {
+    async removeMet({commit}, metId: string) {
         const {data} = await metaltterApi.delete<unknown, AxiosResponse<Met>>(`/mets/${metId}`)
         commit('removeMet', data)
     }

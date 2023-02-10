@@ -13,6 +13,14 @@ const mutations: MutationTree<IUserState> = {
 
     removeToken(state: IUserState, token: string) {
         state.token = token
+    },
+
+    setKudos(state: IUserState, kudos: string[]) {
+        state.kudos = kudos
+    },
+
+    addKudos(state: IUserState, kudo: string) {
+        state.kudos.push(kudo)
     }
 }
 

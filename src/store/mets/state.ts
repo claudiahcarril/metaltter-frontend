@@ -9,8 +9,7 @@ export interface IMetState {
 
 export interface MetParams {
     page: number
-    sort: string
-    message: string
+    limit: number
 }
 
 function state(): IMetState {

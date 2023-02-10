@@ -11,7 +11,7 @@
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
             </div>
             <div v-else></div>
-            <div class="kudos">
+            <div class="kudos" @click="addKudos()">
                 <img src="../assets/hand.png" alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
             </div>
@@ -22,9 +22,10 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
+import useLogin from '@/composable/useLogin'
 
 export default defineComponent({
     name: 'MetDetail',
@@ -36,9 +37,20 @@ export default defineComponent({
         },
     },
 
-    setup() {
+    setup(props) {
+        const { user, addKudo } = useLogin()
+
+        const click = ref<string>('');
+
         return{ 
+            click,
             imagesUrl: config.imagesUrl,
+
+            async addKudos() {
+                const kudo = String(props.met._id)
+                console.log(kudo)
+                await addKudo(String(props.met._id))
+            }
             
         }
     }
@@ -116,6 +128,7 @@ export default defineComponent({
     font-size: 20px;
     align-items: center;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .met-datecreated {

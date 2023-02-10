@@ -86,6 +86,16 @@
                     <MetDetailPrivate v-for="met in userMets" :key="met" :met="met"></MetDetailPrivate>
                 </div>
             </div>
+            <div class="button-more">
+                <CustomButton v-on:click="setPage">
+                    <template v-slot:left-icon>
+                        <i class="bi bi-arrow-down-circle-fill"></i>
+                    </template>
+                    <template v-slot:right-text>
+                        <span>Ver más mets</span>
+                    </template>
+                </CustomButton>
+            </div>
 
         </div>
 
@@ -123,6 +133,8 @@ export default defineComponent({
         const router = useRouter()
 
         let sorting = ref<string>('descending')
+        const page = ref<number>(1)
+        const limit = ref<number>(5)
  
         fetchMetsPostedByUser(user.value._id)
 
@@ -157,8 +169,16 @@ export default defineComponent({
             async getNewMets() {
                 sorting.value = 'ascending'
                 fetchMetsPostedByUser(user.value._id)
-            }   
-            // goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}})
+            },
+            
+            async setPage(page2: number, limit2: number) {
+                page.value = page2
+                limit2 = limit.value + 5
+                console.log(limit2)
+                fetchMetsPostedByUser(user.value._id)
+            }
+
+
         }
     },
 })
@@ -396,4 +416,11 @@ a, i {
 a:active, i:active {
     color: black;
 }
+
+.button-more {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+
 </style>

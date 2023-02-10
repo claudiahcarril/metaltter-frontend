@@ -29,7 +29,16 @@
         @goProfile="goProfile"
         />
     </div>
-    <div></div>
+    <div class="button-more">
+        <CustomButton v-on:click="setPage">
+            <template v-slot:left-icon>
+                <i class="bi bi-arrow-down-circle-fill"></i>
+            </template>
+            <template v-slot:right-text>
+                <span>Ver más mets</span>
+            </template>
+        </CustomButton>
+    </div>
 </template>
 
 
@@ -56,7 +65,11 @@ export default defineComponent({
         const { mets, isLoading, fetchMets, fetchMetsByDate } = useMets()
         const router = useRouter()
         let sorting = ref<string>('descending')
-        fetchMets()
+
+        const page = ref<number>(1)
+        const limit = ref<number>(5)
+
+        fetchMets({page: page.value, limit: limit.value})
 
 
         return {
@@ -67,11 +80,18 @@ export default defineComponent({
 
             async getOldMets() {
                 sorting.value = 'descending'
-                fetchMetsByDate()
+                fetchMetsByDate({page: page.value, limit: limit.value})
             },
             async getNewMets() {
                 sorting.value = 'ascending'
-                fetchMets()
+                fetchMets({page: page.value, limit: limit.value})
+            },
+
+            async setPage(page2: number, limit2: number) {
+                page.value = page2
+                limit2 = limit.value + 5
+                console.log(limit2)
+                fetchMets({ page: page2, limit: limit2 })
             }
             
         }
@@ -130,6 +150,13 @@ a:active {
 
 span {
     margin-left: 10px;
+}
+
+
+.button-more {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
 }
 
 </style>

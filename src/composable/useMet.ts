@@ -1,4 +1,5 @@
 import { Met, newMet } from "@/models/mets"
+import { MetParams } from "@/store/mets/state"
 import { computed } from "vue"
 import { useStore } from "vuex"
 
@@ -12,8 +13,8 @@ const useMets = () => {
         userMets: computed(() => store.getters['mets/getMetPostedByUser']),
 
         // ACTIONS
-        fetchMets: () => store.dispatch('mets/fetchMets'),
-        fetchMetsByDate: () => store.dispatch('mets/fetchMetsByDate'),
+        fetchMets: (params: MetParams) => store.dispatch('mets/fetchMets', params),
+        fetchMetsByDate: (params: MetParams) => store.dispatch('mets/fetchMetsByDate', params),
         fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId),
         fetchMetsPostedByUserDate: (userId: string) => store.dispatch('mets/fetchMetsPostedByUserDate', userId),
         addMet: (met: newMet) => store.dispatch('mets/addMet', met),

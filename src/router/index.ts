@@ -2,18 +2,12 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 
 const routes: Array<RouteRecordRaw> = [
+
+  // PUBLICS PATHS
   {
     path: '/',
     name: 'home-public',
     component: () => import(/* webpackChunkName: "home-public" */ '../views/HomePublicView.vue')
-  },
-  {
-    path: '/:id',
-    name: 'home-private',
-    component: () => import(/* webpackChunkName: "home-private" */ '../views/HomePrivateView.vue'),
-    props: (route) => {
-      return { id: route.params.id }
-    }
   },
   {
     path: '/login',
@@ -34,6 +28,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/users/:id',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
+    props: (route) => {
+      return { id: route.params.id }
+    }
+  },
+
+
+
+  // PRIVATE PATHS
+  {
+    path: '/:id',
+    name: 'home-private',
+    component: () => import(/* webpackChunkName: "home-private" */ '../views/HomePrivateView.vue'),
     props: (route) => {
       return { id: route.params.id }
     }
