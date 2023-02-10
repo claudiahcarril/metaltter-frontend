@@ -56,6 +56,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 .form {
   background-color: black;
   border: 1px solid #bc2025;
