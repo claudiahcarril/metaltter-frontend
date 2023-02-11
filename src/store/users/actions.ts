@@ -13,7 +13,12 @@ const actions: ActionTree<IUserState, IState> = {
     },
 
     async fetchUserById({commit}, userId: string) {
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<User>>(`/users/${userId}`)
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<User>>(`/users/id/${userId}`)
+        commit('setSelectedUser', data)
+    },
+
+    async fetchUserByUsername({commit}, username: string) {
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<User>>(`/users/${username}`)
         commit('setSelectedUser', data)
     },
 

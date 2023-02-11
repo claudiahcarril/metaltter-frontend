@@ -11,8 +11,8 @@
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
             </div>
             <div v-else></div>
-            <div class="kudos" @click="addKudos()">
-                <img src="../assets/hand.png" alt="" width="25" height="25">
+            <div class="kudos" @click="switchKudos()">
+                <img :src="handImage" alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
             </div>
         </div>
@@ -22,7 +22,7 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
 import useLogin from '@/composable/useLogin'
@@ -38,18 +38,34 @@ export default defineComponent({
     },
 
     setup(props) {
-        const { addKudo } = useLogin()
+        const { switchKudo, hasKudo } = useLogin()
+
+        let hand = ref<string>('no-clicked')
+
+        const handImage = computed(() => {
+            return hasKudo(props.met._id) ? '/img/handWithKudo.png' : '/img/hand.png'
+        })
 
         const click = ref<string>('');
 
         return{ 
             click,
+            hand,
+            hasKudo,
+            handImage,
             imagesUrl: config.imagesUrl,
 
-            async addKudos() {
+            async switchKudos() {
                 const metId = props.met._id
-                await addKudo(metId)
-            }
+                hand.value = 'clicked'
+                await switchKudo(metId)
+            },
+
+            // async removeKudos() {
+            //     const metId = props.met._id
+            //     hand.value = 'no-clicked'
+            //     await addKudo(metId)
+            // }
             
         }
     }

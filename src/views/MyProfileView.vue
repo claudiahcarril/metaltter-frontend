@@ -36,7 +36,7 @@
         <div class="column2">
             <div class="form-title-section">
                 <h1 class="form-title">¿Qué quieres contar hoy?</h1>
-                <img src="../assets/hand.png" alt="" width="60" height="60">
+                <!-- <img src="../assets/hand.png" alt="" width="60" height="60"> -->
             </div>
             <form @submit.prevent="sendMet" class="form">
                 <div class="row">

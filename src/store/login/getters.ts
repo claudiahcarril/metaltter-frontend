@@ -13,6 +13,12 @@ const getters: GetterTree<IUserState, IState> = {
 
     getKudos(state) {
         return state.kudos
+    },
+
+    hasKudo(state) {
+        return (metId:string) => {
+            return state.kudos.includes(metId)
+        }
     }
 }
 

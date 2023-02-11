@@ -20,11 +20,18 @@ const mutations: MutationTree<IUserState> = {
         state.kudos = kudos
     },
 
-    addKudos(state: IUserState, kudo: string) {
-        if (!state.kudos.includes(kudo)) {
-            state.kudos.push(kudo)
+    addKudo(state: IUserState, metId: string) {
+        if (!state.kudos.includes(metId)) {
+            state.kudos.push(metId)
         }
-    }
+    },
+
+    deleteKudo(state: IUserState, metId: string) {
+        if (state.kudos.includes(metId)) {
+            state.kudos = state.kudos.filter(k => k !== metId)
+        }
+    },
+
 }
 
 export default mutations

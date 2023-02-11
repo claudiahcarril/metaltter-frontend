@@ -76,7 +76,7 @@ export default defineComponent({
             sorting,
             mets,
             isLoading,
-            goProfile: (met: Met) => router.push({name: 'profile', params: {id: met.postedBy._id}}),
+            goProfile: (met: Met) => router.push({name: 'profile', params: {username: met.postedBy.username}}),
 
             async getOldMets() {
                 sorting.value = 'descending'

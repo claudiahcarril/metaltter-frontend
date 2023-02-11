@@ -2,7 +2,7 @@
     <NavBarPublic />
     <SearchBar />
 
-    <div class="user">
+    <div v-if="user" class="user">
         <div class="user-avatar">
             <img :src="imagesUrl + user.avatar" alt="sndfsnb" width="250" height="250">
         </div>
@@ -79,10 +79,6 @@ export default defineComponent({
     },
 
     props: {
-        id: {
-            type: String,
-            required: true
-        },
         username: {
             type: String,
             required: true
@@ -90,7 +86,7 @@ export default defineComponent({
     },
     
     setup(props) {
-        const { user, fetchUserById } = useUsers()
+        const { user, fetchUserByUsername } = useUsers()
         const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser, fetchMetsPostedByUserDate } = useMets()
         
         let sorting = ref<string>('descending')
@@ -98,10 +94,11 @@ export default defineComponent({
         const limit = ref<number>(5)
 
 
-        fetchUserById(props.id)
-        fetchMetsPostedByUser(props.id)
-
-
+        fetchUserByUsername(props.username)
+            .then(() => {
+                fetchMetsPostedByUser(user.value._id)
+            })
+        
         return {
             imagesUrl: config.imagesUrl,
             sorting,
@@ -114,11 +111,11 @@ export default defineComponent({
 
             async getOldMets() {
                 sorting.value = 'descending'
-                fetchMetsPostedByUserDate(props.id)
+                fetchMetsPostedByUserDate(user.value._id)
             },
             async getNewMets() {
                 sorting.value = 'ascending'
-                fetchMetsPostedByUser(props.id)
+                fetchMetsPostedByUser(user.value._id)
             },
             
             async setPage(page2: number, limit2: number) {

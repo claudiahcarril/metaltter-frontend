@@ -15,8 +15,8 @@ const useMets = () => {
         // ACTIONS
         fetchMets: (params: MetParams) => store.dispatch('mets/fetchMets', params),
         fetchMetsByDate: (params: MetParams) => store.dispatch('mets/fetchMetsByDate', params),
-        fetchMetsPostedByUser: (userId: string) => store.dispatch('mets/fetchMetsPostedByUser', userId),
-        fetchMetsPostedByUserDate: (userId: string) => store.dispatch('mets/fetchMetsPostedByUserDate', userId),
+        fetchMetsPostedByUser: (username: string) => store.dispatch('mets/fetchMetsPostedByUser', username),
+        fetchMetsPostedByUserDate: (username: string) => store.dispatch('mets/fetchMetsPostedByUserDate', username),
         addMet: (met: newMet) => store.dispatch('mets/addMet', met),
         removeMet: (met: Met) => store.dispatch('mets/removeMet', met),
     }

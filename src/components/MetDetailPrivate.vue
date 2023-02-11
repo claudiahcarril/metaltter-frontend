@@ -12,7 +12,7 @@
             </div>
             <div v-else></div>
             <div class="kudos" @click="counter++">
-                <img src="../assets/hand.png" alt="" width="25" height="25">
+                <img alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
             </div>
         </div>
