@@ -1,5 +1,11 @@
 <template>
     <NavBarPrivate />
+    <div class="background">
+        <img src="../assets/back-private.png" alt="back">
+        <h1 class="title">Bienvenid@ {{ user.username }} a </h1>
+        <img class="logo" src="../assets/metaltterLogo.png" alt="">
+    </div>
+    <img src="../../public/img/hand.png" alt="">
     <SearchBar />
 
     <div class="list-mets">
@@ -51,6 +57,7 @@ import useMets from '@/composable/useMet';
 import CustomButton from '@/components/CustomButton.vue';
 import { useRouter } from 'vue-router';
 import { Met } from '@/models/mets';
+import useLogin from '@/composable/useLogin';
 
 export default defineComponent({
     name: 'ListMets',
@@ -63,6 +70,7 @@ export default defineComponent({
 
     setup() {
         const { mets, isLoading, fetchMets, fetchMetsByDate } = useMets()
+        const {user} = useLogin()
         const router = useRouter()
         let sorting = ref<string>('descending')
 
@@ -74,6 +82,7 @@ export default defineComponent({
 
         return {
             sorting,
+            user,
             mets,
             isLoading,
             goProfile: (met: Met) => router.push({name: 'profile', params: {username: met.postedBy.username}}),
@@ -101,6 +110,28 @@ export default defineComponent({
 
 
 <style scoped>
+
+.background > img {
+    max-width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.title  {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .list-mets {
     display: flex;

@@ -1,5 +1,11 @@
 <template>
     <NavBarPublic />
+    <div class="background">
+        <img src="../assets/back.png" alt="back">
+        <!-- <h1 class="title">Bienvenid@ a Metaltter</h1> -->
+        <img class="logo" src="../assets/metaltterLogo.png" alt="">
+    </div>
+    <img src="../../public/img/hand.png" alt="">
     <SearchBar />
 
     <div class="list-mets">
@@ -101,6 +107,20 @@ export default defineComponent({
 
 
 <style scoped>
+
+.background > img {
+    max-width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.logo  {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
 
 .list-mets {
     display: flex;

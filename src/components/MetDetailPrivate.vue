@@ -27,7 +27,7 @@
                         <span>Editar</span>
                     </template>
                 </ButtonMet>
-                <ButtonMet>
+                <ButtonMet v-on:click="removeMet">
                     <template v-slot:left-icon>
                         <i class="bi bi-trash"></i>
                     </template>
@@ -49,6 +49,8 @@ import { defineComponent, PropType, ref } from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
 import ButtonMet from './ButtonMet.vue'
+import useMets from '@/composable/useMet'
+import { propsToAttrMap } from '@vue/shared'
 
 export default defineComponent({
     name: 'MetDetailPrivate',
@@ -64,11 +66,18 @@ export default defineComponent({
     },
 
     setup(props) {
-        const counter = ref<number>(props.met.kudos)
+        const { met, removeMet, fetchMetById } = useMets()
 
         return{ 
-            counter,
             imagesUrl: config.imagesUrl,
+
+            async removeMet() {
+                const metSelected = await fetchMetById(met.value.id)
+                // const metId2 = {_id: props.met._id}
+                console.log(metSelected)
+                // console.log(metId2)
+                // await removeMet(metId)
+            }
             
          }
     }

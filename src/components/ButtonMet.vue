@@ -1,15 +1,21 @@
 <template>
-    <button type="submit" @click="$emit('clicked')" class="btn btn-outline-success">
+    <button type="submit" @click="(click)" class="btn btn-outline-success">
         <slot name="left-icon"></slot>
         <slot name="right-text"></slot>
     </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
     name: 'ButtonMet',
+    setup() {
+        const click = ref<string>('');
+        return{
+            click,
+        }
+    }
 })
 </script>
 

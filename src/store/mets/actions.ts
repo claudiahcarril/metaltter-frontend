@@ -11,9 +11,15 @@ const actions: ActionTree<IMetState, IState> = {
         const perPage = params.limit
         // const skip = (params.page - 1) * perPage
         console.log(perPage)
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?&limit=${perPage}`)
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?limit=${perPage}`)
+        // const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?message=${params.message}&limit=${perPage}`)
         commit('setMets', data)
         commit('setIsLoading', false)
+    },
+
+    async fetchMetById({commit}, metId: string) {
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met>>(`/mets/${metId}`)
+        commit('setMetSelected', data)
     },
 
     async fetchMetsByDate({ commit }, params: MetParams) {
@@ -40,7 +46,7 @@ const actions: ActionTree<IMetState, IState> = {
         commit('addMet', data)
     },
 
-    async removeMet({commit}, metId: string) {
+    async removeMet({commit}, metId: number) {
         const {data} = await metaltterApi.delete<unknown, AxiosResponse<Met>>(`/mets/${metId}`)
         commit('removeMet', data)
     }

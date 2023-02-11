@@ -36,7 +36,7 @@
         <div class="column2">
             <div class="form-title-section">
                 <h1 class="form-title">¿Qué quieres contar hoy?</h1>
-                <!-- <img src="../assets/hand.png" alt="" width="60" height="60"> -->
+                <img src="../../public/img/hand.png" alt="" width="60" height="60">
             </div>
             <form @submit.prevent="sendMet" class="form">
                 <div class="row">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <input v-model="dateCreated" type="date" class="form-control" required>
+                        <input v-model="dateCreated" type="datetime-local" class="form-control" required>
                     </div>
                     <div class="col-sm-4">
                         <!-- <input v-model="dateCreated" type="time" class="form-control" required> -->
@@ -138,6 +138,7 @@ export default defineComponent({
  
         fetchMetsPostedByUser(user.value._id)
 
+
         const message = ref<string>('');
         const image = ref<string>('');
         const dateCreated = ref<string>('');
@@ -162,6 +163,12 @@ export default defineComponent({
                 await addMet(newMet)
                 fetchMetsPostedByUser(user.value._id)
             },
+
+            // async deleteMet() {
+
+            // },
+
+
             async getOldMets() {
                 sorting.value = 'descending'
                 fetchMetsPostedByUserDate(user.value._id)
