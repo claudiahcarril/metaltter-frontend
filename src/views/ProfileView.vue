@@ -1,5 +1,6 @@
 <template>
-    <NavBarPublic />
+    <NavBarPrivate v-if="loggedUser"/>
+    <NavBarPublic v-else/>
     <SearchBar />
 
     <div v-if="user" class="user">
@@ -62,12 +63,14 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
+import NavBarPrivate from '@/components/NavBarPrivate.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import useUsers from '@/composable/useUsers';
 import MetDetail from '@/components/MetDetail.vue';
 import CustomButton from '@/components/CustomButton.vue';
 import config from '@/config';
 import useMets from '@/composable/useMet';
+import useLogin from '@/composable/useLogin';
 
 export default defineComponent({
     name: 'ProfilePublic',
@@ -75,7 +78,8 @@ export default defineComponent({
         NavBarPublic,
         SearchBar,
         MetDetail,
-        CustomButton
+        CustomButton,
+        NavBarPrivate
     },
 
     props: {
@@ -88,6 +92,7 @@ export default defineComponent({
     setup(props) {
         const { user, fetchUserByUsername } = useUsers()
         const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser, fetchMetsPostedByUserDate } = useMets()
+        const { user: loggedUser} = useLogin()
         
         let sorting = ref<string>('descending')
         const page = ref<number>(1)
@@ -108,6 +113,7 @@ export default defineComponent({
             isLoading,
             fetchMets,
             fetchMetsPostedByUser,
+            loggedUser,
 
             async getOldMets() {
                 sorting.value = 'descending'

@@ -48,11 +48,11 @@ export default defineComponent({
     },
 
     setup() {
-        const { deleteToken } = useLogin()
+        const { logout } = useLogin()
 
         return {
             removeToken() {
-                deleteToken()
+                logout()
                 router.push({name: 'login'})
             } 
         }

@@ -12,8 +12,10 @@ const mutations: MutationTree<IUserState> = {
         state.token = token
     },
 
-    removeToken(state: IUserState, token: string) {
-        state.token = token
+    logout(state: IUserState) {
+        state.token = null
+        state.user = null
+        state.kudos = []
     },
 
     setKudos(state: IUserState, kudos: string[]) {

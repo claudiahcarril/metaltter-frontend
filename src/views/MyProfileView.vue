@@ -128,7 +128,7 @@ export default defineComponent({
 
     setup() {
         const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsPostedByUserDate } = useMets()
-        const { user, deleteToken } = useLogin()
+        const { user, logout } = useLogin()
         const { removeUser } = useUsers()
         const router = useRouter()
 
@@ -154,7 +154,7 @@ export default defineComponent({
             dateCreated,
             unsubscribeUser: () => {
                 removeUser(user.value._id)
-                deleteToken()
+                logout()
                 router.push({name: `login`})
             },
             async sendMet() {

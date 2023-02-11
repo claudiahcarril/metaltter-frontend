@@ -20,10 +20,9 @@ const actions: ActionTree<IUserState, IState> = {
         dispatch('loadKudos')
     },
 
-    async deleteToken({ commit }) {
-        localStorage.getItem('token')
+    async logout({ commit }) {
         localStorage.removeItem('token')
-        commit('removeToken')
+        commit('logout')
     },
 
     async loadKudos({commit}) {

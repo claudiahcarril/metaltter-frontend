@@ -13,7 +13,7 @@ const useLogin = () => {
 
         // ACTIONS
         login: (credentials: Credentials) => store.dispatch('login/login', credentials),
-        deleteToken: () => store.dispatch('login/deleteToken'),
+        logout: () => store.dispatch('login/logout'),
         switchKudo: async (metId: string) => {
             if (!store.getters['login/hasKudo'](metId)) {
                 await metaltterApi.post('/kudos', {metId})

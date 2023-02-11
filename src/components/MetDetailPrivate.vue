@@ -11,8 +11,8 @@
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
             </div>
             <div v-else></div>
-            <div class="kudos" @click="counter++">
-                <img alt="" width="25" height="25">
+            <div class="kudos" >
+                <img src="/img/hand.png" alt="" width="25" height="25">
                 <div class="met-kudos">{{ met.kudos }}</div>
             </div>
         </div>

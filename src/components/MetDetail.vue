@@ -61,12 +61,6 @@ export default defineComponent({
                 await switchKudo(metId)
             },
 
-            // async removeKudos() {
-            //     const metId = props.met._id
-            //     hand.value = 'no-clicked'
-            //     await addKudo(metId)
-            // }
-            
         }
     }
 
