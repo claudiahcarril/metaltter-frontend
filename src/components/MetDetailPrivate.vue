@@ -49,9 +49,6 @@ import { defineComponent, PropType} from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
 import ButtonMet from './ButtonMet.vue'
-import useMets from '@/composable/useMet'
-// import useLogin from '@/composable/useLogin'
-
 
 export default defineComponent({
     name: 'MetDetailPrivate',
@@ -67,22 +64,11 @@ export default defineComponent({
     },
 
     setup() {
-        const { met } = useMets()
-        // const { user } = useLogin()
 
         return{ 
             imagesUrl: config.imagesUrl,
 
-            // async removeMet() {
-            //     fetchMetsPostedByUser(user.value)
-            //     const metSelected = await fetchMetById(props.met._id)
-            //     const metSelected2 = await fetchMetById(met.value.id)
-            //     // const metId2 = {_id: props.met._id}
-            //     console.log(metSelected)
-            //     // console.log(metId2)
-            //     // await removeMet(metId)
-            // }
-            
+
          }
     }
 

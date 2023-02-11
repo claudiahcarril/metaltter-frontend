@@ -1,4 +1,4 @@
-import { Met, newMet } from "@/models/mets"
+import { newMet } from "@/models/mets"
 import { MetParams } from "@/store/mets/state"
 import { computed } from "vue"
 import { useStore } from "vuex"
