@@ -83,7 +83,9 @@
             <div class="mets-list">
                 <div v-if="isLoading">Cargando mets...</div>
                 <div class="mets" v-else>
-                    <MetDetailPrivate v-for="met in userMets" :key="met" :met="met"></MetDetailPrivate>
+                    <MetDetailPrivate v-for="met in userMets" :key="met" :met="met"
+                        @removeMet="removeMet"
+                    />
                 </div>
             </div>
             <div class="button-more">
@@ -118,6 +120,7 @@ import { useRouter } from 'vue-router';
 import useUsers from '@/composable/useUsers';
 import config from '@/config';
 import useLogin from '@/composable/useLogin';
+import { Met } from '@/models/mets';
 
 export default defineComponent({
     components: {
@@ -127,7 +130,7 @@ export default defineComponent({
     },
 
     setup() {
-        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsPostedByUserDate } = useMets()
+        const { mets, isLoading, userMets, fetchMetsPostedByUser, addMet, fetchMetsPostedByUserDate, removeMet } = useMets()
         const { user, logout } = useLogin()
         const { removeUser } = useUsers()
         const router = useRouter()
@@ -164,9 +167,10 @@ export default defineComponent({
                 fetchMetsPostedByUser(user.value._id)
             },
 
-            // async deleteMet() {
-
-            // },
+            removeMet: (met: Met) => {
+                removeMet(met._id)
+                fetchMetsPostedByUser(user.value._id)
+            },
 
 
             async getOldMets() {

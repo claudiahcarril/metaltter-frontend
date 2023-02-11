@@ -1,11 +1,11 @@
 <template>
     <div class="met">
-        <div class="met-avatar" @click="$emit('goProfile', met)">
+        <div class="met-avatar">
             <img :src="imagesUrl + met.postedBy.avatar" alt="sndfsnb" width="80" height="80">
         </div>
         <div class="met-body">
-            <div class="met-name" @click="$emit('goProfile', met)">{{ met.postedBy.name}}</div>
-            <div class="met-username" @click="$emit('goProfile', met)">@{{ met.postedBy.username }}</div>
+            <div class="met-name">{{ met.postedBy.name}}</div>
+            <div class="met-username">@{{ met.postedBy.username }}</div>
             <div class="met-content">{{ met.message }}</div>
             <div v-if="met.image !== ''" class="met-image">
                 <img :src="imagesUrl + met.image" alt="sndfsnb">
@@ -27,7 +27,7 @@
                         <span>Editar</span>
                     </template>
                 </ButtonMet>
-                <ButtonMet v-on:click="removeMet">
+                <ButtonMet @click="$emit('removeMet', met)">
                     <template v-slot:left-icon>
                         <i class="bi bi-trash"></i>
                     </template>
@@ -45,12 +45,13 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, PropType} from 'vue'
 import { Met } from '@/models/mets'
 import config from '@/config'
 import ButtonMet from './ButtonMet.vue'
 import useMets from '@/composable/useMet'
-import { propsToAttrMap } from '@vue/shared'
+// import useLogin from '@/composable/useLogin'
+
 
 export default defineComponent({
     name: 'MetDetailPrivate',
@@ -65,19 +66,22 @@ export default defineComponent({
         },
     },
 
-    setup(props) {
-        const { met, removeMet, fetchMetById } = useMets()
+    setup() {
+        const { met } = useMets()
+        // const { user } = useLogin()
 
         return{ 
             imagesUrl: config.imagesUrl,
 
-            async removeMet() {
-                const metSelected = await fetchMetById(met.value.id)
-                // const metId2 = {_id: props.met._id}
-                console.log(metSelected)
-                // console.log(metId2)
-                // await removeMet(metId)
-            }
+            // async removeMet() {
+            //     fetchMetsPostedByUser(user.value)
+            //     const metSelected = await fetchMetById(props.met._id)
+            //     const metSelected2 = await fetchMetById(met.value.id)
+            //     // const metId2 = {_id: props.met._id}
+            //     console.log(metSelected)
+            //     // console.log(metId2)
+            //     // await removeMet(metId)
+            // }
             
          }
     }

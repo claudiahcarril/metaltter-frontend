@@ -20,11 +20,21 @@
                     <img src="../assets/following-icon.png" alt="" width="25" height="25">
                 </div>
             </div>
+            <div class="addfollow">
+                <ButtonMet>
+                    <template v-slot:left-icon>
+                        <i class="bi bi-person-fill-add"></i>
+                    </template>
+                    <template v-slot:right-text>
+                        <span>Seguir</span>
+                    </template>
+                </ButtonMet>
+            </div>
         </div>
     </div>
     <div class="list-mets">
         <div class="home-info">
-            <h1 class="h1">Últimas publicaciones</h1>
+            <h1 class="h1">Últimas publicaciones de @{{ user.username }}</h1>
             <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
@@ -68,6 +78,7 @@ import SearchBar from '@/components/SearchBar.vue';
 import useUsers from '@/composable/useUsers';
 import MetDetail from '@/components/MetDetail.vue';
 import CustomButton from '@/components/CustomButton.vue';
+import ButtonMet from '@/components/ButtonMet.vue'
 import config from '@/config';
 import useMets from '@/composable/useMet';
 import useLogin from '@/composable/useLogin';
@@ -79,7 +90,8 @@ export default defineComponent({
         SearchBar,
         MetDetail,
         CustomButton,
-        NavBarPrivate
+        NavBarPrivate,
+        ButtonMet
     },
 
     props: {

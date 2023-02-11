@@ -14,12 +14,12 @@ const useMets = () => {
 
         // ACTIONS
         fetchMets: (params: MetParams) => store.dispatch('mets/fetchMets', params),
-        fetchMetById: (metId: string) => store.dispatch('users/fetchUserById', metId),
+        fetchMetById: (metId: string) => store.dispatch('mets/fetchMetById', metId),
         fetchMetsByDate: (params: MetParams) => store.dispatch('mets/fetchMetsByDate', params),
         fetchMetsPostedByUser: (username: string) => store.dispatch('mets/fetchMetsPostedByUser', username),
         fetchMetsPostedByUserDate: (username: string) => store.dispatch('mets/fetchMetsPostedByUserDate', username),
         addMet: (met: newMet) => store.dispatch('mets/addMet', met),
-        removeMet: (met: Met) => store.dispatch('mets/removeMet', met),
+        removeMet: (metId: string) => store.dispatch('mets/removeMet', metId),
     }
 }
 
