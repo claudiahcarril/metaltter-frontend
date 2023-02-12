@@ -19,6 +19,16 @@ const getters: GetterTree<IUserState, IState> = {
         return (metId:string) => {
             return state.kudos.includes(metId)
         }
+    },
+
+    getFollows(state) {
+        return state.follows
+    },
+
+    hasFollow(state) {
+        return (userId:string) => {
+            return state.follows.includes(userId)
+        }
     }
 }
 

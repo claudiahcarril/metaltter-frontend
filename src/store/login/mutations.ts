@@ -16,6 +16,7 @@ const mutations: MutationTree<IUserState> = {
         state.token = null
         state.user = null
         state.kudos = []
+        state.follows = []
     },
 
     setKudos(state: IUserState, kudos: string[]) {
@@ -31,6 +32,22 @@ const mutations: MutationTree<IUserState> = {
     deleteKudo(state: IUserState, metId: string) {
         if (state.kudos.includes(metId)) {
             state.kudos = state.kudos.filter(k => k !== metId)
+        }
+    },
+
+    setFollows(state: IUserState, follows: string[]) {
+        state.follows = follows
+    },
+
+    addFollow(state: IUserState, userId: string) {
+        if (!state.follows.includes(userId)) {
+            state.follows.push(userId)
+        }
+    },
+
+    removeFollow(state: IUserState, userId: string) {
+        if (state.follows.includes(userId)) {
+            state.follows = state.follows.filter(f => f !== userId)
         }
     },
 

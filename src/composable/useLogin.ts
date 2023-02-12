@@ -10,10 +10,12 @@ const useLogin = () => {
         user: computed(() => store.getters['login/getUser']),
         token: computed(() => store.getters['login/getToken']),
         hasKudo: (metId: string) => store.getters['login/hasKudo'](metId),
+        hasFollow: (userId: string) => store.getters['login/hasFollow'](userId),
 
         // ACTIONS
         login: (credentials: Credentials) => store.dispatch('login/login', credentials),
         logout: () => store.dispatch('login/logout'),
+        setToken: (token: string) => store.dispatch('login/setToken', token),
         switchKudo: async (metId: string) => {
             if (!store.getters['login/hasKudo'](metId)) {
                 await metaltterApi.post('/kudos', {metId})
@@ -25,7 +27,17 @@ const useLogin = () => {
                 store.commit('mets/deleteKudo', metId)
             }
         },
-        setToken: (token: string) => store.dispatch('login/setToken', token),
+        switchFollow: async (userId: string) => {
+            if (!store.getters['login/hasFollow'](userId)) {
+                await metaltterApi.post('/follow', {userId})
+                store.commit('login/addFollow', userId)
+                store.commit('users/addFollow', userId)
+            } else {
+                await metaltterApi.delete(`/follow/${userId}`)
+                store.commit('login/removeFollow', userId)
+                store.commit('users/removeFollow', userId)
+            }
+        },
     }
 }
 

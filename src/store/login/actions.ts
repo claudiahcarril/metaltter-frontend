@@ -18,6 +18,7 @@ const actions: ActionTree<IUserState, IState> = {
         const response = await metaltterApi.get('/auth/profile')
         commit('setUser', response.data)
         dispatch('loadKudos')
+        dispatch('loadFollows')
     },
 
     async logout({ commit }) {
@@ -28,6 +29,11 @@ const actions: ActionTree<IUserState, IState> = {
     async loadKudos({commit}) {
         const {data} = await metaltterApi.get('/kudos')
         commit('setKudos', data)
+    },
+
+    async loadFollows({commit}) {
+        const {data} = await metaltterApi.get('/follow')
+        commit('setFollows', data)
     },
 }
 

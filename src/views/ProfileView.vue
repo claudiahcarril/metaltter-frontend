@@ -12,27 +12,38 @@
             <div class="user-username">@{{ user.username }}</div>
             <div class="follow">
                 <div class="followers">
-                    <div class="met-kudos">Seguidores: {{ user.followers }}</div>
+                    <div class="met-kudos">Seguidores: {{ user.totalFollowers }}</div>
                     <img class="followers-icon" src="../assets/followers-icon.png" alt="" width="25" height="25">
                 </div>
                 <div class="following">
-                    <div class="met-kudos"> Siguiendo: {{ user.following }}</div>
+                    <div class="met-kudos"> Siguiendo: {{ user.totalFollowing }}</div>
                     <img src="../assets/following-icon.png" alt="" width="25" height="25">
                 </div>
             </div>
-            <div class="addfollow">
-                <ButtonMet>
-                    <template v-slot:left-icon>
-                        <i class="bi bi-person-fill-add"></i>
-                    </template>
-                    <template v-slot:right-text>
-                        <span>Seguir</span>
-                    </template>
-                </ButtonMet>
+            <div v-if="loggedUser">
+                <div class="addfollow" @click="switchFollows()">
+                    <ButtonMet v-if="!follow">
+                        <template v-slot:left-icon>
+                            <i class="bi bi-person-fill-add"></i>
+                        </template>
+                        <template v-slot:right-text>
+                            <span>Seguir</span>
+                        </template>
+                    </ButtonMet>
+                    <ButtonMet v-else class="siguiendo">
+                        <template v-slot:left-icon>
+                            <i class="bi bi-person-fill-add"></i>
+                        </template>
+                        <template v-slot:right-text>
+                            <span>Siguiendo</span>
+                        </template>
+                    </ButtonMet>
+                </div>
             </div>
+            <div v-else></div>
         </div>
     </div>
-    <div class="list-mets">
+    <div v-if="user" class="list-mets">
         <div class="home-info">
             <h1 class="h1">Últimas publicaciones de @{{ user.username }}</h1>
             <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
@@ -71,7 +82,7 @@
 
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
 import NavBarPrivate from '@/components/NavBarPrivate.vue';
 import useUsers from '@/composable/useUsers';
@@ -102,11 +113,14 @@ export default defineComponent({
     setup(props) {
         const { user, fetchUserByUsername } = useUsers()
         const { mets, userMets, isLoading, fetchMets, fetchMetsPostedByUser, fetchMetsPostedByUserDate } = useMets()
-        const { user: loggedUser} = useLogin()
+        const { user: loggedUser, hasFollow, switchFollow } = useLogin()
         
         let sorting = ref<string>('descending')
         const page = ref<number>(1)
         const limit = ref<number>(5)
+        let follow = computed(() => {
+            return hasFollow(user.value._id)
+        })
 
 
         fetchUserByUsername(props.username)
@@ -124,6 +138,9 @@ export default defineComponent({
             fetchMets,
             fetchMetsPostedByUser,
             loggedUser,
+            hasFollow,
+            switchFollow,
+            follow,
 
             async getOldMets() {
                 sorting.value = 'descending'
@@ -139,7 +156,14 @@ export default defineComponent({
                 limit2 = limit.value + 5
                 console.log(limit2)
                 fetchMets({ page: page2, limit: limit2 })
-            }
+            },
+
+            async switchFollows() {
+                const userId = user.value._id
+                // follow = 'following'
+                await switchFollow(userId)
+            },
+
         }
     }
 
@@ -264,6 +288,9 @@ span {
     padding-bottom: 100px;
 }
 
+.siguiendo {
+    background-color: #bc2025;
+}
 
 
 </style>

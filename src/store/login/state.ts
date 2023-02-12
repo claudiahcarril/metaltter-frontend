@@ -4,6 +4,7 @@ export interface IUserState {
     user: User | null
     token: string | null
     kudos: string[]
+    follows: string[]
 }
 
 
@@ -11,7 +12,8 @@ function state(): IUserState {
     return {
         user: null,
         token: null,
-        kudos: []
+        kudos: [],
+        follows: []
     }
 }
 

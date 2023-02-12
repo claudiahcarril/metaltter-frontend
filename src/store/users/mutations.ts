@@ -18,6 +18,28 @@ const mutations: MutationTree<IUserState> = {
     removeUser(state, user: User) {
         const tmp = state.users.filter(u => u._id !== user._id)
         state.users = tmp
+    },
+
+    addFollow (state, userId: string) {
+        if (state.selectedUser?._id === userId) {
+            state.selectedUser.totalFollowers++
+        }
+        const user = state.users.find(u => u._id === userId)
+        if (!user) {
+            return
+        }
+        user.totalFollowers++
+    },
+
+    removeFollow (state, userId: string) {
+        if (state.selectedUser?._id === userId) {
+            state.selectedUser.totalFollowers--
+        }
+        const user = state.users.find(u => u._id === userId)
+        if (!user) {
+            return
+        }
+        user.totalFollowers--
     }
 }
 

@@ -97,7 +97,7 @@ export default defineComponent({
             async setPage(page2: number, limit2: number) {
                 page.value = page2
                 limit2 = limit.value + 5
-                fetchMets({ page: page2, limit: limit2 })
+                fetchMets({ page: page2, limit: limit2, word })
             },
 
             filterMets (filter: string) {

@@ -12,11 +12,11 @@
                     <div class="user-username">@{{ user.username }} </div>
                     <div class="follow">
                         <div class="followers">
-                            <div class="met-kudos">Seguidores: {{ user.followers }}</div>
+                            <div class="met-kudos">Seguidores: {{ user.totalFollowers }}</div>
                             <img class="followers-icon" src="../assets/followers-icon.png" alt="" width="25" height="25">
                         </div>
                         <div class="following">
-                            <div class="met-kudos"> Siguiendo: {{ user.following }}</div>
+                            <div class="met-kudos"> Siguiendo: {{ user.totalFollowing }}</div>
                             <img src="../assets/following-icon.png" alt="" width="25" height="25">
                         </div>
                     </div>

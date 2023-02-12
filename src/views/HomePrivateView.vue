@@ -101,7 +101,7 @@ export default defineComponent({
                 page.value = page2
                 limit2 = limit.value + 5
                 console.log(limit2)
-                fetchMets({ page: page2, limit: limit2 })
+                fetchMets({ page: page2, limit: limit2, word })
             },
 
             filterMets (filter: string) {
