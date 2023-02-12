@@ -48,6 +48,12 @@ const actions: ActionTree<IMetState, IState> = {
     async removeMet({commit}, metId: number) {
         const {data} = await metaltterApi.delete<unknown, AxiosResponse<Met>>(`/mets/${metId}`)
         commit('removeMet', data)
+    },
+
+    async fetchMetsUsersFollowing({commit}, params: MetParams) {
+        const perPage = params.limit
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/follow/mets?&limit=${perPage}`)
+        commit('setMetsUsersFollowing', data)
     }
 }
 

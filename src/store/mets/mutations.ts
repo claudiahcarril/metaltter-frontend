@@ -50,6 +50,10 @@ const mutations: MutationTree<IMetState> = {
             return
         }
         met.kudos--
+    },
+
+    setMetsUsersFollowing(state, userMetsFollowing: Met[]) {
+        state.userMetsFollowing = userMetsFollowing
     }
 }
 

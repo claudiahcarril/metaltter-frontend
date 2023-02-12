@@ -5,6 +5,7 @@ export interface IMetState {
     isLoading: boolean
     selectedMet: Met | null
     metsPostedByUser: Met[]
+    userMetsFollowing: Met[]
 }
 
 export interface MetParams {
@@ -18,7 +19,8 @@ function state(): IMetState {
         mets: [],
         isLoading: false,
         selectedMet: null,
-        metsPostedByUser: []
+        metsPostedByUser: [],
+        userMetsFollowing: []
     }
 }
 

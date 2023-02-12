@@ -11,6 +11,8 @@ const useMets = () => {
         isLoading: computed(() => store.getters['mets/getIsLoading']),
         met: computed(() => store.getters['mets/getMet']),
         userMets: computed(() => store.getters['mets/getMetPostedByUser']),
+        userMetsFollowing: computed(()=> store.getters['mets/getMetsUserFollowing']),
+        
 
         // ACTIONS
         fetchMets: (params: MetParams) => store.dispatch('mets/fetchMets', params),
@@ -20,6 +22,7 @@ const useMets = () => {
         fetchMetsPostedByUserDate: (username: string) => store.dispatch('mets/fetchMetsPostedByUserDate', username),
         addMet: (met: newMet) => store.dispatch('mets/addMet', met),
         removeMet: (metId: string) => store.dispatch('mets/removeMet', metId),
+        fetchMetsUsersFollowing: (params: MetParams) => store.dispatch('mets/fetchMetsUsersFollowing', params)
     }
 }
 

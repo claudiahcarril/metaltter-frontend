@@ -17,6 +17,10 @@ const getters: GetterTree<IMetState, IState> = {
 
     getMetPostedByUser(state) {
         return state.metsPostedByUser
+    },
+
+    getMetsUserFollowing(state) {
+        return state.userMetsFollowing
     }
 
 

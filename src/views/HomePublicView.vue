@@ -87,11 +87,11 @@ export default defineComponent({
 
             async getOldMets() {
                 sorting.value = 'descending'
-                fetchMetsByDate({page: page.value, limit: limit.value})
+                fetchMetsByDate({page: page.value, limit: limit.value, word})
             },
             async getNewMets() {
                 sorting.value = 'ascending'
-                fetchMets({page: page.value, limit: limit.value})
+                fetchMets({page: page.value, limit: limit.value, word})
             },
 
             async setPage(page2: number, limit2: number) {
