@@ -1,7 +1,7 @@
 <template>
     <NavBarPrivate v-if="loggedUser"/>
     <NavBarPublic v-else/>
-    <SearchBar />
+
 
     <div v-if="user" class="user">
         <div class="user-avatar">
@@ -74,7 +74,6 @@
 import { defineComponent, ref } from 'vue'
 import NavBarPublic from '@/components/NavBarPublic.vue';
 import NavBarPrivate from '@/components/NavBarPrivate.vue';
-import SearchBar from '@/components/SearchBar.vue';
 import useUsers from '@/composable/useUsers';
 import MetDetail from '@/components/MetDetail.vue';
 import CustomButton from '@/components/CustomButton.vue';
@@ -87,7 +86,6 @@ export default defineComponent({
     name: 'ProfilePublic',
     components: {
         NavBarPublic,
-        SearchBar,
         MetDetail,
         CustomButton,
         NavBarPrivate,

@@ -10,9 +10,8 @@ const actions: ActionTree<IMetState, IState> = {
         commit('setIsLoading', true)
         const perPage = params.limit
         // const skip = (params.page - 1) * perPage
-        console.log(perPage)
-        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?limit=${perPage}`)
-        // const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?message=${params.message}&limit=${perPage}`)
+        // const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?limit=${perPage}`)
+        const {data} = await metaltterApi.get<unknown, AxiosResponse<Met[]>>(`/mets?word=${params.word}&limit=${perPage}`)
         commit('setMets', data)
         commit('setIsLoading', false)
     },

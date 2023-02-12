@@ -10,7 +10,7 @@ export interface IMetState {
 export interface MetParams {
     page: number
     limit: number
-    // message: string
+    word?: string
 }
 
 function state(): IMetState {

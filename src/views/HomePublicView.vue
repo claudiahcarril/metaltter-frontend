@@ -6,7 +6,7 @@
         <img class="logo" src="../assets/metaltterLogo.png" alt="">
     </div>
     <img src="../../public/img/hand.png" alt="">
-    <SearchBar />
+    <SearchBar @filter="filterMets"/>
 
     <div class="list-mets">
         <div class="home-info">
@@ -74,8 +74,9 @@ export default defineComponent({
 
         const page = ref<number>(1)
         const limit = ref<number>(5)
+        let word = ''
 
-        fetchMets({page: page.value, limit: limit.value})
+        fetchMets({page: page.value, limit: limit.value, word})
 
 
         return {
@@ -96,8 +97,14 @@ export default defineComponent({
             async setPage(page2: number, limit2: number) {
                 page.value = page2
                 limit2 = limit.value + 5
-                console.log(limit2)
                 fetchMets({ page: page2, limit: limit2 })
+            },
+
+            filterMets (filter: string) {
+                page.value = 1
+                word = filter
+                fetchMets({page: page.value, limit: limit.value, word})
+                console.log(word)
             }
             
         }
