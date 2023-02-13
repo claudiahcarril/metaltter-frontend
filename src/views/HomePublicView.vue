@@ -1,16 +1,16 @@
 <template>
     <NavBarPublic />
     <div class="background">
-        <img src="../assets/back.png" alt="back">
+        <img src="../assets/backPublic.png" alt="back">
         <!-- <h1 class="title">Bienvenid@ a Metaltter</h1> -->
-        <img class="logo" src="../assets/metaltterLogo.png" alt="">
+        <!-- <img class="logo" src="../assets/metaltterLogo.png" alt=""> -->
     </div>
     <img src="../../public/img/hand.png" alt="">
     <SearchBar @filter="filterMets"/>
 
     <div class="list-mets">
         <div class="home-info">
-            <h1 class="h1">Últimos añadidos mets en Metaltter</h1>
+            <h1 class="h1">Últimos mets añadidos en Metaltter</h1>
             <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
@@ -116,7 +116,7 @@ export default defineComponent({
 <style scoped>
 
 .background > img {
-    max-width: 100%;
+    width: 100%;
     display: inline-block;
     text-align: center;
 }
@@ -147,14 +147,14 @@ export default defineComponent({
 .home-info {
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-end;
     width: 100%;
     padding-right: 130px;
 }
 .h1 {
-    font-size: xx-large;
-    color: black;
+    font-size: 2.5rem;
+    color: #bc2025;
     text-align: start;
     font-weight: 700;
     margin: 30px 0 0 100px;
@@ -185,5 +185,7 @@ span {
     justify-content: center;
     padding-bottom: 100px;
 }
+
+
 
 </style>

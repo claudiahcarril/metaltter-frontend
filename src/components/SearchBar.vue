@@ -39,6 +39,8 @@ export default defineComponent({
 .d-flex {
     margin: 20px 50px 20px 50px;
     width: 90%;
+    padding-left: 200px;
+    padding-right: 200px;
     /* position: fixed; z-index: 8; */
 }
 
@@ -60,6 +62,10 @@ export default defineComponent({
     background-color: black;
 }
 
+.form-control {
+    /* background-color: #bc20252b; */
+    color: black;
+}
 
 .form-control:focus {
   border-color: #bc2025;

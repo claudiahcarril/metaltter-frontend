@@ -198,7 +198,7 @@ export default defineComponent({
 }
 
 .user-name {
-    font-size: x-large;
+    font-size: 3rem;
     color: white;
     font-weight: 700;
 }
@@ -225,7 +225,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     color: white;
-    margin-right: 20px;
+    margin-right: 50px;
 }
 
 .following {
@@ -257,7 +257,7 @@ export default defineComponent({
 .home-info {
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-end;
     width: 100%;
     padding-right: 130px;

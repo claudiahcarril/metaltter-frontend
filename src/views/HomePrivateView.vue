@@ -1,11 +1,11 @@
 <template>
     <NavBarPrivate />
     <div class="background">
-        <img src="../assets/back-private.png" alt="back">
+        <img src="../assets/backPrivate.png" alt="back">
         <h1 class="title">Bienvenid@ {{ loggedUser.username }} a </h1>
         <img class="logo" src="../assets/metaltterLogo.png" alt="">
     </div>
-    <img src="../../public/img/hand.png" alt="">
+    <img src="../../public/img/handWithKudo.png" alt="">
     <SearchBar @filter="filterMets" />
 
     <div class="list-mets">
@@ -127,12 +127,18 @@ export default defineComponent({
 
 
 <style scoped>
+.background  {
+    width: 100%;
+}
 
 .background > img {
-    max-width: 100%;
+    width: 100%;
     display: inline-block;
     text-align: center;
 }
+
+
+
 
 .title  {
     position: absolute;
@@ -144,6 +150,7 @@ export default defineComponent({
 }
 
 .logo {
+    max-width: 20%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -168,14 +175,14 @@ export default defineComponent({
 .home-info {
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-end;
     width: 100%;
     padding-right: 130px;
 }
 .h1 {
-    font-size: xx-large;
-    color: black;
+    font-size: 2.5rem;
+    color: #bc2025;
     text-align: start;
     font-weight: 700;
     margin: 30px 0 0 100px;

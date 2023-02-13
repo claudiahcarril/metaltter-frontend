@@ -4,7 +4,7 @@
   <router-view/>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 import useLogin from './composable/useLogin'
 
@@ -33,7 +33,7 @@ export default defineComponent({
 
 body, html {
   height: 100%;
-  background-image: url(./assets/guitars.png);
+  background-image: url(./assets/guitars2.png);
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: contain;

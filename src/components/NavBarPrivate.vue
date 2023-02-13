@@ -8,6 +8,14 @@
         <div class="navbar-buttons">
             <CustomButton>
                 <template v-slot:left-icon>
+                    <i class="bi bi-search-heart-fill"></i>
+                </template>
+                <template v-slot:right-text>
+                    <router-link :to="{name: 'home-private'}">Explorar mets</router-link>
+                </template>
+            </CustomButton>
+            <CustomButton>
+                <template v-slot:left-icon>
                     <i class="bi bi-send"></i>
                 </template>
                 <template v-slot:right-text>

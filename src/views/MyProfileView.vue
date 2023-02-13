@@ -61,7 +61,7 @@
             </form>
 
             <div class="form-title-section-2">
-                <h1 class="form-title-2">VER MIS METS</h1>
+                <h1 class="form-title-2">Mis mets publicados</h1>
                 <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
@@ -242,7 +242,7 @@ export default defineComponent({
 }
 
 .user-name {
-    font-size: xx-large;
+    font-size: 3rem;
     color: white;
     font-weight: 700;
 }
@@ -262,13 +262,14 @@ export default defineComponent({
     font-weight: 600;
     font-size: 20px;
     align-items: flex-start;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .followers {
     display: flex;
     flex-direction: row;
     color: white;
+    margin-bottom: 10px;
 }
 
 .following {
@@ -316,7 +317,7 @@ export default defineComponent({
 .form-title-section-2 {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: end;
   justify-content: center;
   width: 100%;
   margin: 50px 0 0 0;
