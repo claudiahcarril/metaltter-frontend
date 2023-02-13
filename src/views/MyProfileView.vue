@@ -242,7 +242,7 @@ export default defineComponent({
 }
 
 .user-name {
-    font-size: 3rem;
+    font-size: 2rem;
     color: white;
     font-weight: 700;
 }

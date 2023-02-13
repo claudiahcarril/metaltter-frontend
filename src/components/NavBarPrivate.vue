@@ -11,7 +11,7 @@
                     <i class="bi bi-search-heart-fill"></i>
                 </template>
                 <template v-slot:right-text>
-                    <router-link :to="{name: 'home-private'}">Explorar mets</router-link>
+                    <router-link :to="{name: 'home-private'}">Explorar</router-link>
                 </template>
             </CustomButton>
             <CustomButton>

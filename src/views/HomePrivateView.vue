@@ -2,7 +2,7 @@
     <NavBarPrivate />
     <div class="background">
         <img src="../assets/backPrivate.png" alt="back">
-        <h1 class="title">Bienvenid@ {{ loggedUser.username }} a </h1>
+        <h1 class="title">Bienvenid@ {{ user.username }} a </h1>
         <img class="logo" src="../assets/metaltterLogo.png" alt="">
     </div>
     <img src="../../public/img/handWithKudo.png" alt="">
@@ -10,7 +10,8 @@
 
     <div class="list-mets">
         <div class="home-info">
-            <h1 class="h1">Últimas publicaciones de los usuarios que sigues</h1>
+            <h1 class="h1" v-if="user.totalFollowing === 0">Últimas publicaciones en Metaltter</h1>
+            <h1 class="h1" v-else>Últimas publicaciones de los usuarios que sigues</h1>
             <CustomButton v-if="sorting === 'ascending'" v-on:click="getOldMets">
                 <template v-slot:left-icon>
                     <i class="bi bi-arrow-down-circle-fill"></i>
@@ -30,18 +31,18 @@
         </div>
     </div>
     <!-- <div v-if="isLoading">Cargando mets...</div> -->
-        <div class="mets-list" v-if="loggedUser">
+        <div class="mets-list" v-if="user.totalFollowing === 0">
+            <MetDetail v-for="met in mets" :key="met" :met="met" 
+            @goProfile="goProfile"
+            />
+        </div>
+        <div class="mets-list" v-else>
             <MetDetail v-for="met in userMetsFollowing" :key="met" :met="met" 
             @goProfile="goProfile"
             />
         </div>
 
 
-        <div class="mets-list" v-else>
-            <MetDetail v-for="met in mets" :key="met" :met="met" 
-            @goProfile="goProfile"
-            />
-        </div>
 
     <div class="button-more">
         <CustomButton v-on:click="setPage">
@@ -78,7 +79,7 @@ export default defineComponent({
 
     setup() {
         const { mets, userMetsFollowing, isLoading, fetchMets, fetchMetsByDate, fetchMetsUsersFollowing } = useMets()
-        const {user: loggedUser} = useLogin()
+        const {user} = useLogin()
         const router = useRouter()
         let sorting = ref<string>('descending')
 
@@ -91,7 +92,7 @@ export default defineComponent({
 
         return {
             sorting,
-            loggedUser,
+            user,
             mets,
             isLoading,
             userMetsFollowing,

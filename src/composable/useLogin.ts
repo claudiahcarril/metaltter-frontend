@@ -23,7 +23,7 @@ const useLogin = () => {
                 store.commit('mets/addKudo', metId)
             } else {
                 await metaltterApi.delete(`/kudos/${metId}`)
-                store.commit('login/deleteKudo')
+                store.commit('login/deleteKudo', metId)
                 store.commit('mets/deleteKudo', metId)
             }
         },
